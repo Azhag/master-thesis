@@ -1,0 +1,147 @@
+
+DEF GROUND Solid {
+  children [
+    Transform {
+      children [
+        Shape {
+          geometry Extrusion {
+            convex FALSE
+            crossSection [
+				$size_with_wall 0
+				$size_cos60_with_wall -$size_sin60_with_wall
+				-$size_cos60_with_wall -$size_sin60_with_wall
+				-$size_with_wall 0
+				-$size_cos60_with_wall $size_sin60_with_wall
+				$size_cos60_with_wall $size_sin60_with_wall
+				$size_with_wall 0
+            ]
+            spine [
+              0 0 0
+              0 0.001 0
+            ]
+          }
+		}
+      ]
+    }
+  ]
+  boundingObject Shape {
+    geometry IndexedFaceSet {
+      coord Coordinate {
+        point [
+          $size 0 $size
+          -$size 0 $size
+          -$size 0 -$size
+          $size 0 -$size
+        ]
+      }
+      coordIndex [
+        0, 1, 2, 3, -1
+      ]
+    }
+  }
+  locked TRUE
+}
+
+DEF WALL Solid {
+  children [
+    Transform {
+      scale 1 1 1
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              ambientIntensity 0.5
+              diffuseColor 0.662745 0.439216 0.219608
+              shininess 0.5
+              specularColor 0.764706 0.505882 0.25098
+            }
+          }
+          geometry Extrusion {
+            convex FALSE
+            crossSection [
+				$size 0
+				$size_cos60 $size_sin60
+				-$size_cos60 $size_sin60
+				-$size 0
+				-$size_cos60 -$size_sin60
+				$size_cos60 -$size_sin60
+				$size 0
+				$size_with_wall 0
+				$size_cos60_with_wall -$size_sin60_with_wall
+				-$size_cos60_with_wall -$size_sin60_with_wall
+				-$size_with_wall 0
+				-$size_cos60_with_wall $size_sin60_with_wall
+				$size_cos60_with_wall $size_sin60_with_wall
+				$size_with_wall 0
+				$size 0
+            ]
+            spine [
+              0 0 0
+              0 0.1 0
+            ]
+          }
+        }
+      ]
+    }
+  ]
+  boundingObject Group {
+    children [
+      Transform {
+        translation $wall_translation_cos60 0.05 -$wall_translation_sin60
+		rotation 0 1 0 -$pi_3
+        children [
+          Box {
+            size $size 0.1 $wall_size
+          }
+        ]
+      }
+      Transform {
+        translation 0 0.05 -$size_sin60_with_wall
+		rotation 0 1 0 0
+        children [
+          Box {
+            size $size 0.1 $wall_size
+          }
+        ]
+      }
+	  Transform {
+        translation -$wall_translation_cos60 0.05 -$wall_translation_sin60
+		rotation 0 1 0 $pi_3
+        children [
+          Box {
+            size $size 0.1 $wall_size
+          }
+        ]
+      }
+	  Transform {
+        translation -$wall_translation_cos60 0.05 $wall_translation_sin60
+		rotation 0 1 0 -$pi_3
+        children [
+          Box {
+            size $size 0.1 $wall_size
+          }
+        ]
+      }
+	  Transform {
+        translation 0 0.05 $size_sin60_with_wall
+		rotation 0 1 0 0
+        children [
+          Box {
+            size $size 0.1 $wall_size
+          }
+        ]
+      }
+	  Transform {
+        translation $wall_translation_cos60 0.05 $wall_translation_sin60
+		rotation 0 1 0 $pi_3
+        children [
+          Box {
+            size $size 0.1 $wall_size
+          }
+        ]
+      }
+    ]
+  }
+  locked TRUE
+}
+

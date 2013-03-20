@@ -1,0 +1,8 @@
+To recompile SPRNG use 
+
+make src
+
+since a full "make" builds all kinds of unneeded binaries that may or may not
+compile on whatever system you're using.
+
+slampoud Tue Jul 27 11:42:42 PDT 2004

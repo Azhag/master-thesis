@@ -1,0 +1,536 @@
+#VRML_SIM V5.0 utf8
+#000000
+#!mainWindow: 0.381944 0 0.619444 0.701474
+#!sceneTreeWindow: 0 0 0.476389 0.366093 0.176389
+#!logWindow: 0.388194 0.706388 0.5 0.298526
+#!robotWindow: "ghostdog" 0.0145833 0.371007 0.3125 0.603194 1
+
+WorldInfo {
+  info [
+    "Robot model for course: Models of Biological Sensory-Motor Systems"
+    "Active/Passive knees"
+    "Biologically Inspired Robotics Group (BIRG)"
+    "Author: Yvan Bourquin"
+    "Date: 10 October 2006"
+  ]
+  title "Ghostdog"
+  CFM 0.0001
+  ERP 0.6
+  basicTimeStep 4
+  displayRefresh 4
+  runRealTime TRUE
+}
+Viewpoint {
+  orientation -0.0143105 0.992157 0.12418 2.44736
+  position 1.97186 0.835514 -2.33708
+}
+Background {
+  skyColor [
+    0.4 0.7 1
+  ]
+}
+DirectionalLight {
+  direction 0.1 -0.5 0.3
+  intensity 1.6
+  castShadows TRUE
+}
+DirectionalLight {
+  direction -0.1 0.5 -0.3
+  intensity 0.8
+}
+DEF GROUND Solid {
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.301961 0.301961 0.301961
+        }
+        texture ImageTexture {
+          url [
+            "textures/texture_grid.png"
+          ]
+        }
+      }
+      geometry DEF GROUND_FACE_SET IndexedFaceSet {
+        coord Coordinate {
+          point [
+            50 0 50
+            -50 0 50
+            -50 0 -50
+            50 0 -50
+          ]
+        }
+        texCoord TextureCoordinate {
+          point [
+            12 12
+            12 -12
+            -12 -12
+            -12 12
+          ]
+        }
+        coordIndex [
+          3, 2, 1, 0
+        ]
+        texCoordIndex [
+          0, 1, 2, 3
+        ]
+      }
+    }
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0 0 0
+        }
+      }
+      geometry Box {
+        size 0.5 0.01 0.5
+      }
+    }
+  ]
+  boundingObject Transform {
+    translation 0 -1 0
+    children [
+      Box {
+        size 100 2 100
+      }
+    ]
+  }
+  locked TRUE
+}
+DEF GHOSTDOG Supervisor {
+  translation 0 0.3 0
+  children [
+    DEF BODY_SHAPE Shape {
+      appearance DEF BODY_APPEARANCE Appearance {
+        material Material {
+        }
+      }
+      geometry Box {
+        size 0.3 0.1 0.2
+      }
+    }
+    DEF NECK0 Servo {
+      translation 0.15 0 0
+      rotation 0 0 1 2.3562
+      children [
+        DEF NECK0_CYL_TRANS Transform {
+          rotation 1 0 0 1.5708
+          children [
+            DEF NECK0_CYL_SHAPE Shape {
+              appearance DEF JOINT_APPEARANCE Appearance {
+                material Material {
+                  diffuseColor 1 0.7 0
+                }
+              }
+              geometry Cylinder {
+                height 0.04
+                radius 0.04
+              }
+            }
+          ]
+        }
+        DEF NECK0_BOX_TRANS Transform {
+          translation 0 -0.05 0
+          children [
+            Shape {
+              appearance USE BODY_APPEARANCE
+              geometry Box {
+                size 0.05 0.1 0.03
+              }
+            }
+          ]
+        }
+        DEF NECK1 Servo {
+          translation 0 -0.1 0
+          rotation 0 0 1 0.7854
+          children [
+            DEF NECK1_CYL_TRANS Transform {
+              rotation 1 0 0 1.5708
+              children [
+                DEF NECK1_CYL_SHAPE Shape {
+                  appearance USE JOINT_APPEARANCE
+                  geometry Cylinder {
+                    height 0.04
+                    radius 0.04
+                  }
+                }
+              ]
+            }
+            DEF NECK1_BOX_TRANS Transform {
+              translation 0 -0.04 0
+              children [
+                DEF NECK1_BOX_SHAPE Shape {
+                  appearance USE BODY_APPEARANCE
+                  geometry Box {
+                    size 0.05 0.08 0.03
+                  }
+                }
+              ]
+            }
+            DEF HEAD Servo {
+              translation 0 -0.08 0
+              children [
+                DEF HEAD_CYL_SHAPE Shape {
+                  appearance USE JOINT_APPEARANCE
+                  geometry Cylinder {
+                    height 0.04
+                    radius 0.04
+                  }
+                }
+                DEF HEAD_BOX_TRANS Transform {
+                  translation -0.05 -0.04 0
+                  children [
+                    DEF HEAD_SHAPE Shape {
+                      appearance USE BODY_APPEARANCE
+                      geometry Box {
+                        size 0.16 0.1 0.16
+                      }
+                    }
+                  ]
+                }
+                DEF RIGHT_CAM Camera {
+                  translation 0 -0.09 0.09
+                  rotation 0 1 0 1.5708
+                  children [
+                    DEF CAM_TRANS Transform {
+                      rotation 1 0 0 1.5708
+                      children [
+                        Shape {
+                          appearance DEF CAM_APPEARANCE Appearance {
+                            material Material {
+                              diffuseColor 0.301961 0.301961 0.301961
+                            }
+                          }
+                          geometry Cylinder {
+                            height 0.04
+                            radius 0.02
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+                DEF LEFT_CAM Camera {
+                  translation 0 -0.09 -0.09
+                  rotation 0 1 0 1.5708
+                  children [
+                    USE CAM_TRANS
+                  ]
+                }
+              ]
+              name "head"
+              boundingObject USE HEAD_BOX_TRANS
+              physics Physics {
+                density 500
+              }
+              minPosition -1.5708
+              maxPosition 1.5708
+            }
+          ]
+          name "neck1"
+          boundingObject USE NECK1_BOX_TRANS
+          physics Physics {
+            density 500
+          }
+          maxVelocity 100
+          maxForce 100
+          minPosition -1.5708
+          maxPosition 0.6
+        }
+      ]
+      name "neck0"
+      boundingObject USE NECK0_BOX_TRANS
+      physics Physics {
+        density 500
+      }
+      maxVelocity 100
+      maxForce 100
+      minPosition -1
+      maxPosition 1
+    }
+    DEF HIP0 Servo {
+      translation 0.08 0 0.12
+      rotation 0 0 1 0
+      children [
+        DEF HIP_TRANS Transform {
+          rotation 1 0 0 1.5708
+          children [
+            DEF HIP_SHAPE Shape {
+              appearance USE JOINT_APPEARANCE
+              geometry Cylinder {
+                height 0.04
+                radius 0.04
+              }
+            }
+          ]
+        }
+        DEF FEMUR_TRANS Transform {
+          translation 0 -0.07 0
+          children [
+            Shape {
+              appearance USE BODY_APPEARANCE
+              geometry Box {
+                size 0.05 0.14 0.03
+              }
+            }
+          ]
+        }
+        DEF KNEE_TRANS Transform {
+          translation 0 -0.14 0
+          rotation 1 0 0 1.5708
+          children [
+            DEF KNEE_SHAPE Shape {
+              appearance USE JOINT_APPEARANCE
+              geometry Cylinder {
+                height 0.04
+                radius 0.04
+              }
+            }
+          ]
+        }
+        DEF KNEE0 Servo {
+          translation 0 -0.14 0
+          rotation 0 0 1 0.7
+          children [
+            DEF KNEE0SPRING Servo {
+              rotation 0 0 1 0
+              children [
+                DEF TIBIA_TRANS Transform {
+                  translation 0 -0.07 0
+                  children [
+                    Shape {
+                      appearance USE BODY_APPEARANCE
+                      geometry Box {
+                        size 0.05 0.14 0.03
+                      }
+                    }
+                  ]
+                }
+                DEF FOOT_TRANS Transform {
+                  translation 0 -0.14 0
+                  rotation 1 0 0 1.5708
+                  children [
+                    Shape {
+                      appearance DEF FOOT_APPEARANCE Appearance {
+                        material Material {
+                          diffuseColor 1 0 0
+                        }
+                      }
+                      geometry Cylinder {
+                        height 0.04
+                        radius 0.04
+                      }
+                    }
+                  ]
+                }
+                USE FOOT_TRANS
+              ]
+              name "knee0spring"
+              boundingObject USE FOOT_TRANS
+              physics DEF NORMAL_PHYSICS Physics {
+                forceDependentSlip 0.01
+                centerOfMass 0 -0.07 0
+              }
+              maxForce 0
+              springConstant 20
+              dampingConstant 0.1
+            }
+          ]
+          name "knee0"
+          boundingObject Box {
+            size 0.001 0.001 0.001
+          }
+          physics Physics {
+          }
+          maxVelocity 100
+          maxForce 100
+          minPosition -1.5708
+          maxPosition 1.5708
+        }
+      ]
+      name "hip0"
+      boundingObject USE KNEE_TRANS
+      physics USE NORMAL_PHYSICS
+      maxVelocity 100
+      maxForce 100
+      minPosition -1.5708
+      maxPosition 1.5708
+    }
+    DEF HIP2 Servo {
+      translation 0.08 0 -0.12
+      rotation 0 0 1 0
+      children [
+        USE HIP_TRANS
+        USE FEMUR_TRANS
+        USE KNEE_TRANS
+        DEF KNEE2 Servo {
+          translation 0 -0.14 0
+          rotation 0 0 1 0.7
+          children [
+            DEF KNEE2SPRING Servo {
+              rotation 0 0 1 0
+              children [
+                USE KNEE_TRANS
+                USE TIBIA_TRANS
+                USE FOOT_TRANS
+              ]
+              name "knee2spring"
+              boundingObject USE FOOT_TRANS
+              physics USE NORMAL_PHYSICS
+              maxForce 0
+              springConstant 20
+              dampingConstant 0.1
+            }
+          ]
+          name "knee2"
+          boundingObject Box {
+            size 0.001 0.001 0.001
+          }
+          physics Physics {
+          }
+          maxVelocity 100
+          maxForce 100
+          minPosition -1.5708
+          maxPosition 1.5708
+        }
+      ]
+      name "hip2"
+      boundingObject USE KNEE_TRANS
+      physics USE NORMAL_PHYSICS
+      maxVelocity 100
+      maxForce 100
+      minPosition -1.5708
+      maxPosition 1.5708
+    }
+    DEF PELVIS Servo {
+      translation -0.18 0 0
+      children [
+        DEF PELVIS_CYL_SHAPE Shape {
+          appearance USE JOINT_APPEARANCE
+          geometry Cylinder {
+            height 0.11
+            radius 0.06
+          }
+        }
+        DEF PELVIS_BOX_SHAPE Transform {
+          translation -0.13 0 0
+          children [
+            Shape {
+              appearance USE BODY_APPEARANCE
+              geometry Box {
+                size 0.2 0.1 0.2
+              }
+            }
+          ]
+        }
+        DEF HIP1 Servo {
+          translation -0.16 0 0.12
+          rotation 0 0 1 0
+          children [
+            USE HIP_TRANS
+            USE FEMUR_TRANS
+            USE KNEE_TRANS
+            DEF KNEE1 Servo {
+              translation 0 -0.14 0
+              rotation 0 0 1 0.7
+              children [
+                DEF KNEE1SPRING Servo {
+                  rotation 0 0 1 0
+                  children [
+                    USE KNEE_TRANS
+                    USE TIBIA_TRANS
+                    USE FOOT_TRANS
+                  ]
+                  name "knee1spring"
+                  boundingObject USE FOOT_TRANS
+                  physics USE NORMAL_PHYSICS
+                  maxForce 0
+                  springConstant 20
+                  dampingConstant 0.1
+                }
+              ]
+              name "knee1"
+              boundingObject Box {
+                size 0.001 0.001 0.001
+              }
+              physics Physics {
+              }
+              maxVelocity 100
+              maxForce 100
+              minPosition -1.5708
+              maxPosition 1.5708
+            }
+          ]
+          name "hip1"
+          boundingObject USE KNEE_TRANS
+          physics USE NORMAL_PHYSICS
+          maxVelocity 100
+          maxForce 100
+          minPosition -1.5708
+          maxPosition 1.5708
+        }
+        DEF HIP3 Servo {
+          translation -0.16 0 -0.12
+          rotation 0 0 1 0
+          children [
+            USE HIP_TRANS
+            USE FEMUR_TRANS
+            USE KNEE_TRANS
+            DEF KNEE3 Servo {
+              translation 0 -0.14 0
+              rotation 0 0 1 0.7
+              children [
+                DEF KNEE3SPRING Servo {
+                  rotation 0 0 1 0
+                  children [
+                    USE KNEE_TRANS
+                    USE TIBIA_TRANS
+                    USE FOOT_TRANS
+                  ]
+                  name "knee3spring"
+                  boundingObject USE FOOT_TRANS
+                  physics USE NORMAL_PHYSICS
+                  maxForce 0
+                  springConstant 20
+                  dampingConstant 0.1
+                }
+              ]
+              name "knee3"
+              boundingObject Box {
+                size 0.001 0.001 0.001
+              }
+              physics Physics {
+              }
+              maxVelocity 100
+              maxForce 100
+              minPosition -1.5708
+              maxPosition 1.5708
+            }
+          ]
+          name "hip3"
+          boundingObject USE KNEE_TRANS
+          physics USE NORMAL_PHYSICS
+          maxVelocity 100
+          maxForce 100
+          minPosition -1.5708
+          maxPosition 1.5708
+        }
+      ]
+      name "spine"
+      boundingObject USE PELVIS_BOX_SHAPE
+      physics Physics {
+        centerOfMass -0.13 0 0
+      }
+      maxVelocity 100
+      maxForce 100
+      minPosition -0.6
+      maxPosition 0.6
+    }
+  ]
+  name "ghostdog"
+  boundingObject USE BODY_SHAPE
+  physics Physics {
+    density 700
+  }
+  controller "bio_gait"
+}

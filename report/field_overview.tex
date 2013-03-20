@@ -1,0 +1,166 @@
+\section{Self-assembly engineering} % (fold)
+\label{sec:self_assembly_engineering}
+	This work has been triggered by an interest in the simulation and modeling of self-assembling processes. Such process can take many forms, from nano-scale assembly~\cite{Grzybowski:2004p253, Griffith:2005p1681, Rechtsman:2006p182} to control of biomolecules~\cite{Forster:2006p4122,Dunbar:2007p3456,XiaorongXiong:2007p3539,Berger:1994p3997} up to modular robotics~\cite{Shen:2007p2613,Klavins:2007p2600}. This field is gaining more and more attention nowadays~\cite{Whitesides:2002p3757}.
+	
+	\subsection{Microscale assembly} % (fold)
+	\label{sub:nano_assembly}
+		Of all these applications, microscale assembly is the one which gathered the most interest in the last few years and which promises the most interesting future applications~\cite{Whitesides:2002p3757,Kassner:2005p197}.
+		
+		While pursuing the race towards even more miniaturization, we are facing new problems that current technologies and methodologies have trouble solving. The lithography process, used to create all the microchip used now, is getting to its limit~\cite{Whitesides:2002p3757}. New approaches become necessary.
+	
+		The current technology for microscale assembly is still in its infancy~\cite{Whitesides:2002p3757}. The current state of research aims at attaching pieces together at specific positions. This either creates bigger scale components, or combines functional devices created via traditional methods. Several methods are currently under study ~\cite{Onoe:2004p4478, Zheng:2005p4548, Stauth:2006p4594, Grzybowski:2004p253}, ranging from attaching mechanisms to prototyping methods.
+		
+		However, such mechanisms are still far from the kind of control we have on the higher scale assembly, and all those processes have a very low production yield. But microscale assembly opens the door to a whole new world of possibilities for integration, system repairs and even active drugs.
+		
+		An interesting distinction for self-assembly, made by Whitesides~\cite{Whitesides:2002p3757}, is the difference between \textit{static} and \textit{dynamic} self-assembly. In static self-assembly, the components once formed stay stable and stop dissipating energy. In dynamic self-assembly, energy is dissipated and should be produced or given in some way. A living cell is a typical example of dynamic self-assembly.
+		
+		Our works aims at studying such dynamical self-assembly, yet at a scale closer to biology (millimeter scale) than microscale scale.
+	% subsection nano_assembly (end)
+	
+	\subsection{Modular robotics} % (fold)
+	\label{sub:modular_robotics}
+		As we aim at using robots as a platform, our work is similar to studies done in modular robotics.
+		
+		Modular robotics encompass any robotic system that can deliberately change its own shape, in order to adapt to new circumstances, perform new tasks or recover from damage~\cite{Shen:2007p2613}\cite{Werfel:2006p7594}.
+		
+		A work close to our approach is the one done by E. Klavins on programable self-assembly~\cite{Klavins:2007p2600, Bishop:2005p2706, McNew:2007p2781, Klavins:2005p3969}. It revolves around the assembly of triangular robots, moving around randomly on an air table and capable of assembling themselves according to a given plan.
+		
+		The plan itself is constructed with a grammar approach, working with \textit{graph grammars}. A graph grammar is a set of rules transforming a graph when applied on it. The assembly is represented as a sequence of application of rules, transforming the initial set of products into a final graph representing the final assembly. Klavins showed methods to construct graph grammars automatically for a given final assembly~\cite{Klavins:2005p3969}.
+		
+		These grammars are then used with the robots to converge to a final shape constructed only by self-assembly.
+		
+		In the first versions of this approach, the particularities of the assembling process, such as geometric difficulties and disassemblies due to shocks, were not taken into account. Klavins accounted for them by measuring the kinetic rate constants of assemblies, and then trying to modify the plan accordingly~\cite{Klavins:2007p2600}.
+		
+		Our approach on the other hand, directly takes into account those reaction rates, making them central and essential to our approach. We think that finding an ``optimal'' theoretical plan is useless when this plan could become ``sub-optimal'' under the constraints of the reactions rates. These rates directly show the physical characteristics of the system to assemble, they are not easily modified.
+		
+		This is also why we will use an approach using Chemical Reaction Networks for our plans and models: they are build to take into account the intrinsic reaction rates of the systems.
+		
+		Furthermore, we study a system of heterogenous parts, adding a specificity and complexity requiring different analysis and techniques.
+	% subsection modular_robotics (end)
+% section self_assembly_engineering (end)
+
+\section{Chemical reaction networks} % (fold)
+\label{sec:chemical_reaction_networks}
+
+	\subsection{Theory} % (fold)
+	\label{sub:theory}
+	
+	Through this project, we use a Chemical Reaction Networks notation and framework as mathematical model. This has been introduced in the context of chemical processes in 1979~\cite{Feinberg:1979p10907} and has been very researched since then.
+	
+	This level of representation is at the same time very general, offering representation of very different processes, and also quite precise and detailed, allowing to construct full dynamic simulations of the system behavior on a computer. This introduction to chemical reactions is adapted from the textbook of J.Wilkinson~\cite{JamesWilkinson:2006p10341}.
+
+	A general chemical reaction takes the form:
+	
+	\begin{equation} \label{eq:general_chemical_reaction}
+		m_1 R_1 + m_2 R_2 + \ldots + m_r R_r \xrightarrow{} n_1 P_1 + n_2 P_2 + \ldots + n_p P_p
+	\end{equation}
+	
+	Where $r$ is the number of reactants and $p$ the number of products. $R_i$ is the $i$th reactant molecule and $P_j$ the $j$th product molecule. $m_i$ is the number of molecules of $R_i$ consumed in a single reaction step, and $n_j$ the number of molecules of $P_j$ produced. The coefficients $m_i$ and $n_j$ are known as \textit{stoichiometries}.	
+	
+	A chemical reaction networks consists of several of these reactions, possibly sharing reactants and/or products. If a reaction can occur in both directions, meaning that the products in the right part can be transformed in the reactants of the left part with the same stoichiometries, we call this reaction \textit{reversible}. A reversible reaction is written as follows (for a simple dimerisation example), see Eq.~\eqref{eq:dimerisation}.
+	
+	\begin{equation}\label{eq:dimerisation}
+		2P \rightleftharpoons P_2
+	\end{equation}
+	
+	Such networks represent the possible \textit{actions} of the systems and the relations between the elements. But it does not represent the dynamics directly. To add this information, we have to make an assumption on the type of dynamics governing the system.
+	
+	In chemical system, a classical governing dynamic is a mass-action stochastic kinetics~\cite{Horn:1972p11163}. In this formulation, we associate to each reaction $R_i$ a \textit{stochastic rate constant}, $c_i$, and an associated \textit{rate law} (or \textit{propensity function}) $h_i(x, c_i)$, where $x = (x_1, x_2, \ldots, x_u)$ is the current state of the system. The form of $h_i(x, c_i)$ (and the interpretation of the rate constant $c_i$), is determined by the order of reaction $R_i$.
+	In every cases, the propensity function has the same interpretation: conditional on the state being $x$ at time $t$, we then have that the probability that an $R_i$ reaction will occur in the time interval $(t, t+dt]$ is given by $h_i(x, c_i)dt$~\cite{JamesWilkinson:2006p10341}.
+	
+	The classical orders of reactions and their propensity functions are as follows:
+	\begin{description}
+		\item[Zeroth-order] $R_i: \; \emptyset \xrightarrow{c_i} X$
+		
+		This represents a constant rate of production of a chemical specie.\\
+		$h_i(x, c_i) = c_i$.
+
+		\item[First-order] $R_i: \; X_j \xrightarrow{c_i} ?$
+		
+		This is the spontaneous transformation of a reactant into new products.\\
+		$h_i(x, c_i) = c_ix_j$, as there are $x_j$ molecules of $X_j$.
+		
+		\item[Second-order] $R_i: \; X_j + X_k \xrightarrow{c_i} ?$
+		
+		This represents a reaction between a pair of reactants.\\
+		$h_i(x, c_i) = c_ix_jx_k$, for all combined pairs of molecules $X_j, X_k$. Special case if $X_j=X_k$: $h_i(x, c_i) = c_i \frac{x_j(x_j-1)}{2}$.
+		\item[Higher orders] Those can be transformed back into second-order reactions, as we make the assumption that a third-order reaction is impossible and actually corresponds to the combined effect of two second-order reactions.
+	\end{description}
+	This allows then to simulate exactly the modeled process assuming we know all the rate constants and rate laws.
+
+	Nowadays, simulation of multiscale systems have become the new interest. A multiscale system is characterized either on the timescale aspect or the copy number of reactants~\cite{Cao:2008p5942}.
+	\begin{enumerate}
+		\item For the timescale aspect, the different scales arise when some reactions are much faster than others. They then quickly reach a stable state, and the global dynamics of the system is driven by the slow reactions.
+		\item For the copy number of reactants, the difference comes from the relative size of the populations. Species with a small population are best viewed as discrete stochastic processes, while the large populations should follow a deterministic model. 
+	\end{enumerate}
+	Such systems, called \textit{stiff} systems, present new problem to commonly used simulations algorithm. They also are of increasing interest in system biology, as a lot of real biological process operates on multiple scales.
+	
+	% subsection theory (end)
+	
+	\subsection{Simulation algorithms} % (fold)
+	\label{sub:simulation_algorithms}
+	
+		Several ways of simulating chemical reaction networks are available.
+		
+		\subsubsection{Ordinary differential equation} % (fold)
+		\label{ssub:ordinary_differential_equation}
+		
+		The simplest one, and the most used by chemists because of thermodynamical limits and number of molecules involved, is to use the associated ordinary differential equation (ODE). One can represent the populations (or concentration, given a finite volume $V$) of all products, and treat the reactions as outflow and inflow acting on those populations. If we take the simple dimerisation system \eqref{eq:dimerisation}, assuming a forward rate $k^+$ and a backward rate $k^-$, we obtain:
+		\begin{eqnarray}
+			\dot{P} & = & -k^+\frac{P(P-1)}{2} + k^-P_2 \\
+			\dot{P_2} & = & k^+\frac{P(P-1)}{2} - k^-P_2
+		\end{eqnarray}
+		
+		Such a transformation is automatic for any chemical reaction network with reactions up to second-order. We can then simulate it using classical numerical integration methods. Note that ODE use continuous number for the populations. Therefore, this approximation can be wrong when the copy number of elements (the number of elements) is small. In classical chemical contexts, the copy numbers are very high (near Avogadro's number), so this is not an issue.
+		% subsubsection ordinary_differential_equation (end)
+		
+		\subsubsection{Gillespie Stochastic simulation algorithm} % (fold)
+		\label{ssub:stochastic_simulations}
+			It has been shown by Gillespie~\cite{Gillespie:2007p1788, Gillespie:1977p5555, Gillespie:1992p8126, Gillespie:2000p5881, Gillespie:1996p4372}, that it is possible to perform an \emph{exact} simulation of a chemical reaction networks. The algorithm is referred to as the Direct Method or Gillespie Stochastic Simulation Algorithm (SSA). It takes advantage of the fact that the time-evolution of a reaction network can be regarded as a stochastic process, and, because the propensity functions depends only on the current state, the system is a continuous time Markov process with a discrete state space. The time to the next reaction follows a exponential distribution $Exp(h_0(x,c))$, with $h_0(x,c) = \sum_{i=1}^v h_i(x,c_i)$ and $v$ reactions. The type of reaction firing is independent of that time, and is given by the probability $h_i(x,c_i)/h_0(x,c)$. We can then simulate the system for each reaction events, up to a desired finishing time.
+			
+			This algorithm, however, is highly inefficient when the number of products and reactants increases. Several optimization have thus been proposed to cope for that limitation.
+		% subsubsection stochastic_simulations (end)
+		
+		\subsubsection{Tau-leaping} % (fold)
+		\label{ssub:tau_leaping}
+		Gillespie first proposed optimization, the tau-leaping optimization~\cite{Gillespie:2001p4354}, aims at make the system evolve for a time $\tau$ where a certain amount of reactions fire instead of simulating every reaction. It is based on the assumption that the propensity functions $a_j(x)$, governing the rates of firing of the reactions, stays nearly constant for a certain time $\tau$. It is then possible to approximate the number of reaction firings during that time $\tau$ by a Poisson process of rate $a_j(x) \tau$.
+
+		Automatic ways of finding $\tau$ also have been proposed~\cite{Cao:2006p6200}, as well as different variations of the tau-leaping: Implicit tau-leaping (performs better for stiff systems)~\cite{Rathinam:2003p5164}, Trapezoidal tau-leaping (more efficient than explicit tau-leaping), and the latest explicit-implicit tau-leaping (combination of the two regimes)~\cite{Cao:2007p5660}.
+		
+		The principle of simulating several reactions events at the same time is also used in another very known algorithm, called the Gibson \& Bruck Next Reaction algorithm~\cite{Gibson:2000p11408}.
+		
+		% subsection tau_leaping (end)
+		\subsubsection{Multiscale systems} % (fold)
+		\label{ssub:ssssa}
+		To simulate multiscale systems with different timescales, Gillespie proposed the Slow Scale Stochastic Simulation Algorithm (ssSSA)~\cite{Cao:2005p5171, Cao:2007p5660, Cao:2005p5664, Gillespie:2007p5659}. 
+		This algorithm uses a quasy steady-state approximation for the fast reactions of the system. The algorithm explicitly simulates only the slow reactions, the fast ones take values governed by steady-states assumptions of convergence. Gillespie defines for that virtual fast processes, that are not touched by the slow reactions. These virtual fast processes can then gives the new populations for the fast species, without simulating them explicitly.
+		% subsection ssssa (end)
+
+		Other ways of simulating multiscale systems have been proposed~\cite{Puchalka:2004p4312}. One of them suggests to simulate the fast reactions using a deterministic approximation~\cite{Haseltine:2002p4632, Haseltine:2005p4685, Kiehl:2004p4266}. The goal is to replace the stochastic processes of the fast reactions with big population by an ODE. In this manner, fast simulation of the fast reactions can be attained, while keeping stochastic simulations for the slow reactions. This Stochastic-deterministic approximation may still pose some convergence problems, as no real proofs of convergence toward the stochastic averages of the initial fully stochastic system have been provided.
+		
+		To complete this overview, there are also algorithm simulating the reactions in a spatially-dependent context, by using diffusion methods~\cite{Isaacson:2006p5432, Andrews:2004p5310, Lu:2004p4353, Turner:2004p4446}.
+		
+		Several toolkits implementing those simulations algorithm are available~\cite{Zhang:2005p4134, Li:2008p11431, Alur:2001p9648}. 
+	% subsection simulation_algorithms (end)
+
+% section chemical_reaction_networks (end)
+
+\section{Considerations on the assembly plan} % (fold)
+\label{sec:considerations_on_the_assembly_plan}
+	Continuing on the discussion with Klavins' approach to self-assembly, we discuss the problem of the assembly plan and its relation to the reaction rates.
+	
+	The complete problem of constructing a final assembly from initial parts can be divided into two parts: a discrete and a continuous one.
+	\begin{enumerate}
+		\item The discrete part consists of the assembly plan itself. It represents a finite and discrete set of rules to construct the final target.
+		\item The continuous part is the rate of evolution of the assembly, driven by the assembly plan but subject to continuous reaction rates. Those rates can take continuous values which will affect the final outcome of the assembly.
+	\end{enumerate}
+	
+	We argue that, taken to the limit, the problem is actually completely continuous. The reaction rates, when pushed toward $0$, will deactivate a part of the assembly plan automatically.
+	
+	We wish then to study the optimization of these continuous reaction rates, as we think they might give more insight on the relations between parts of the plan and as they encompass the same power as the discrete part.
+	
+	In order to go in that direction completely, one would need to consider the ``full assembly plan''. Such a plan would consists of every possible assembly steps towards the creation of a final assembly. Indeed, it would become quite big quickly, but pruning is possible, mainly because we assume that we have heterogenous pieces that have highly specific assembling sites. Such a plan is easily obtained using any enumeration method, for example Pólya enumeration~\cite{Polya:1937p11740}.
+	
+	But in this work, we only consider a subset of this ``full assembly plan''. We assume that we are given a part of this plan, which already creates the final assembly. We then study only the effect of the reactions rates on this plan, and see what parts of it an optimization technique will push forward or cut down. This is an assumed simplification for the current work.
+	
+% section considerations_on_the_assembly_plan (end)

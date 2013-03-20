@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	TODO XML Schema to be defined 
+-->
+<PuzzleWorld>
+	<Arena>
+		<Shape>hexagon</Shape>
+		<Size>2.0</Size>
+	</Arena>
+	<Pieces nbBlocks="5">
+		<Piece>
+			<Type>1</Type>
+			<NumberInstances>1</NumberInstances>
+			<Controller>piece_selfassembly</Controller>
+			<CoulombFriction>0.003</CoulombFriction>
+			<InitialPosition>random</InitialPosition>
+		</Piece>
+		<Piece>
+			<Type>2</Type>
+			<NumberInstances>2</NumberInstances>
+			<Controller>piece_selfassembly</Controller>
+			<InitialPosition>random</InitialPosition>
+			<CoulombFriction>0.0025</CoulombFriction>
+		</Piece>
+		<Piece>
+			<Type>3</Type>
+			<NumberInstances>1</NumberInstances>
+			<Controller>piece_selfassembly</Controller>
+			<InitialPosition>random</InitialPosition>
+			<CoulombFriction>0.002</CoulombFriction>
+		</Piece>
+		<Piece>
+			<Type>4</Type>
+			<NumberInstances>1</NumberInstances>
+			<Controller>piece_selfassembly</Controller>
+			<InitialPosition>random</InitialPosition>
+			<CoulombFriction>0.002</CoulombFriction>
+		</Piece>
+	</Pieces>
+	<Supervisor>
+			<Controller>supervisor_statistics</Controller>
+	</Supervisor>
+</PuzzleWorld>

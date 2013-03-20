@@ -1,0 +1,11 @@
+The files here is a demo for users to write their .cshrc.
+
+Users in UCSB can use the dell.cshrc directly for the 
+Dell CNSI cluster(dell.cnsi.ucsb.edu), 
+
+If the cluster in the CS department is used, special 
+attention must be paid to the gcc version.
+
+Wherever you use our parallel pacakge, we recommend 
+you build SPRNG in your own computer to avoid conflicts.
+

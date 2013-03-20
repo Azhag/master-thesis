@@ -1,0 +1,355 @@
+#VRML_SIM V5.0 utf8
+#000000
+#!mainWindow: 0.00277778 0 0.494444 0.675676
+#!sceneTreeWindow: 0.477083 0.29484 0.402778 0.361179 0.253472
+#!textEditorWindow: 0.50625 0 0.486111 0.898034 0.347222
+#!logWindow: 0.513194 0.756757 0.467361 0.238329
+#!robotWindow: "" 0.536111 0.0933661 0.277778 0.737101 1
+
+WorldInfo {
+  info [
+    "Created using Webots Python World Generator (WebotsPWG)"
+    "Author: Loic Matthey, loic.matthey@epfl.ch"
+    "Date: 2008-05-30"
+  ]
+  basicTimeStep 16
+}
+Viewpoint {
+  orientation 0.555602 0.621978 0.55177 4.25604
+  position -1.13331 11.1873 0.739792
+}
+Background {
+  skyColor [
+    0.4 0.7 1
+  ]
+}
+DirectionalLight {
+  direction -0.5 -1 -0.5
+  intensity 0.5
+}
+PointLight {
+  ambientIntensity 0.5
+  attenuation 1 1 1
+  intensity 0.5
+  location 0 0.5 0
+  radius 5
+}
+PointLight {
+  ambientIntensity 0.5
+  attenuation 1 1 1
+  intensity 0.5
+  location 2.25 0.5 2.25
+  radius 5
+}
+PointLight {
+  ambientIntensity 0.5
+  attenuation 1 1 1
+  intensity 0.5
+  location -2.25 0.5 -2.25
+  radius 5
+}
+PointLight {
+  ambientIntensity 0.5
+  attenuation 1 1 1
+  intensity 0.5
+  location 2.25 0.5 -2.25
+  radius 5
+}
+PointLight {
+  ambientIntensity 0.5
+  attenuation 1 1 1
+  intensity 0.5
+  location -2.25 0.5 2.25
+  radius 5
+}
+DEF GROUND Solid {
+  translation 0 -0.3 0
+  children [
+    DEF ground_shape Shape {
+      geometry Box {
+        size 10 0.1 10
+      }
+    }
+  ]
+  boundingObject USE ground_shape
+}
+DEF PLATFORM CustomRobot {
+  rotation 1 0 0 1.57076
+  children [
+    DEF platform_foot Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.333333 0.258824 0.8
+        }
+      }
+      geometry Box {
+        size 4 4 0.5
+      }
+    }
+    Servo {
+      translation 0 0 -0.4
+      rotation 1 0 0 0
+      children [
+        DEF platform_movable Shape {
+          geometry Box {
+            size 3 3 0.1
+          }
+        }
+        DEF Holes Solid {
+          translation -0.6 0.6 -0.2
+          rotation 1 0 0 1.57076
+          children [
+            Transform {
+              children [
+                DEF ONEHOLE Group {
+                  children [
+                    Transform {
+                      children [
+                        DEF LBOX Shape {
+                          appearance Appearance {
+                            material Material {
+                              diffuseColor 0.8 0.8 0
+                            }
+                          }
+                          geometry Box {
+                            size 0.3 0.1 0.1
+                          }
+                        }
+                      ]
+                    }
+                    Transform {
+                      translation 0.2 0 0.05
+                      children [
+                        DEF SBOX Shape {
+                          appearance Appearance {
+                            material Material {
+                              diffuseColor 0.8 0.8 0
+                            }
+                          }
+                          geometry Box {
+                            size 0.1 0.1 0.2
+                          }
+                        }
+                      ]
+                    }
+                    Transform {
+                      translation 0.15 0 0.25
+                      children [
+                        Shape {
+                          appearance Appearance {
+                            material Material {
+                              diffuseColor 0.8 0.8 0
+                            }
+                          }
+                          geometry Box {
+                            size 0.2 0.1 0.2
+                          }
+                        }
+                      ]
+                    }
+                    Transform {
+                      translation -0.05 0 0.2
+                      rotation 0 1 0 1.5707
+                      children [
+                        USE SBOX
+                      ]
+                    }
+                    Transform {
+                      translation -0.1 0 0.4
+                      rotation 0 1 0 1.5707
+                      children [
+                        USE LBOX
+                      ]
+                    }
+                    Transform {
+                      translation 0.1 0 0.45
+                      children [
+                        USE SBOX
+                      ]
+                    }
+                    Transform {
+                      translation 0.3 0 0.5
+                      children [
+                        USE LBOX
+                      ]
+                    }
+                    Transform {
+                      translation 0.35 0 0.3
+                      rotation 0 1 0 1.5707
+                      children [
+                        USE SBOX
+                      ]
+                    }
+                    Transform {
+                      translation 0.4 0 0.1
+                      rotation 0 1 0 1.5707
+                      children [
+                        USE LBOX
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+            Solid {
+              translation 0.6 0 0
+              children [
+                USE ONEHOLE
+              ]
+              boundingObject USE ONEHOLE
+            }
+            Solid {
+              translation 1.2 0 0
+              children [
+                USE ONEHOLE
+              ]
+              boundingObject USE ONEHOLE
+            }
+            Solid {
+              translation 0 0 0.6
+              children [
+                USE ONEHOLE
+              ]
+              boundingObject USE ONEHOLE
+            }
+            Solid {
+              translation 0.6 0 0.6
+              children [
+                USE ONEHOLE
+              ]
+              boundingObject USE ONEHOLE
+            }
+            Solid {
+              translation 1.2 0 0.6
+              children [
+                USE ONEHOLE
+              ]
+              boundingObject USE ONEHOLE
+            }
+          ]
+          boundingObject Group {
+            children [
+              Transform {
+                children [
+                  DEF LBOX Shape {
+                    appearance Appearance {
+                      material Material {
+                        diffuseColor 0.8 0.8 0
+                      }
+                    }
+                    geometry Box {
+                      size 0.3 0.1 0.1
+                    }
+                  }
+                ]
+              }
+              Transform {
+                translation 0.2 0 0.05
+                children [
+                  DEF SBOX Shape {
+                    appearance Appearance {
+                      material Material {
+                        diffuseColor 0.8 0.8 0
+                      }
+                    }
+                    geometry Box {
+                      size 0.1 0.1 0.2
+                    }
+                  }
+                ]
+              }
+              Transform {
+                translation 0.15 0 0.25
+                children [
+                  Shape {
+                    appearance Appearance {
+                      material Material {
+                        diffuseColor 0.8 0.8 0
+                      }
+                    }
+                    geometry Box {
+                      size 0.2 0.1 0.2
+                    }
+                  }
+                ]
+              }
+              Transform {
+                translation -0.05 0 0.2
+                rotation 0 1 0 1.5707
+                children [
+                  USE SBOX
+                ]
+              }
+              Transform {
+                translation -0.1 0 0.4
+                rotation 0 1 0 1.5707
+                children [
+                  USE LBOX
+                ]
+              }
+              Transform {
+                translation 0.1 0 0.45
+                children [
+                  USE SBOX
+                ]
+              }
+              Transform {
+                translation 0.3 0 0.5
+                children [
+                  USE LBOX
+                ]
+              }
+              Transform {
+                translation 0.35 0 0.3
+                rotation 0 1 0 1.5707
+                children [
+                  USE SBOX
+                ]
+              }
+              Transform {
+                translation 0.4 0 0.1
+                rotation 0 1 0 1.5707
+                children [
+                  USE LBOX
+                ]
+              }
+            ]
+          }
+        }
+      ]
+      name "platform_servo"
+      boundingObject USE platform_movable
+      type "linear"
+    }
+  ]
+  boundingObject USE platform_foot
+  physics Physics {
+    density -1
+    mass 100
+    bounce 0
+    coulombFriction 1000
+  }
+  controller "platform"
+}
+Solid {
+  translation -0.48717 2.54819 0.378306
+  children [
+    DEF piece_sh Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.329412 0.454902 0.8
+          transparency 0.3
+        }
+      }
+      geometry Box {
+        size 0.07 0.1 0.17
+      }
+    }
+  ]
+  boundingObject USE piece_sh
+  physics Physics {
+    density -1
+    mass 0.1
+    forceDependentSlip 0.5
+  }
+}

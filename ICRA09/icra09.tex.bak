@@ -1,0 +1,114 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%2345678901234567890123456789012345678901234567890123456789012345678901234567890
+%        1         2         3         4         5         6         7         8
+
+%\documentclass[letterpaper, 10 pt, conference]{ieeeconf}  % Comment this line out
+                                                          % if you need a4paper
+\documentclass[a4paper, 10pt, conference]{ieeeconf}      % Use this line for a4
+                                                          % paper
+
+\IEEEoverridecommandlockouts                              % This command is only
+                                                          % needed if you want to
+                                                          % use the \thanks command
+\overrideIEEEmargins
+% See the \addtolength command later in the file to balance the column lengths
+% on the last page of the document
+
+
+
+% The following packages can be found on http:\\www.ctan.org
+\usepackage{cite}
+\usepackage[pdftex]{graphicx} % for pdf, bitmapped graphics files
+%\usepackage{epsfig} % for postscript graphics files
+%\usepackage{mathptmx} % assumes new font selection scheme installed
+%\usepackage{times} % assumes new font selection scheme installed
+\usepackage{amsmath} % assumes amsmath package installed
+\usepackage{amssymb}  % assumes amsmath package installed
+\newtheorem{theorem}{Theorem}
+
+\title{\LARGE \bf Stochastic Strategies for a Swarm Robotic Assembly System}
+
+%Chemical network modeling for top-down control design of an assembly
+%task
+
+%\author{ \parbox{3 in}{\centering Huibert Kwakernaak*
+%         \thanks{*Use the $\backslash$thanks command to put information here}\\
+%         Faculty of Electrical Engineering, Mathematics and Computer Science\\
+%         University of Twente\\
+%         7500 AE Enschede, The Netherlands\\
+%         {\tt\small h.kwakernaak@autsubmit.com}}
+%         \hspace*{ 0.5 in}
+%         \parbox{3 in}{ \centering Pradeep Misra**
+%         \thanks{**The footnote marks may be inserted manually}\\
+%        Department of Electrical Engineering \\
+%         Wright State University\\
+%         Dayton, OH 45435, USA\\
+%         {\tt\small pmisra@cs.wright.edu}}
+%}
+
+\author{Lo\"ic Matthey, Spring Berman and Vijay Kumar% <-this % stops a space
+\thanks{}% <-this % stops a space
+\thanks{
+        {\tt\small }}%
+\thanks{L. Matthey is with the DISAL Laboratory, Ecole Polytechnique Federale de Lausanne, Station 14, 1015 Lausanne, Switzerland,
+{\tt\small loic.matthey@epfl.ch}}
+\thanks{S. Berman and V. Kumar are with the GRASP Laboratory, University of Pennsylvania, 3330 Walnut Street, Philadelphia, PA 19104, USA,
+        {\tt\small \{spring, kumar\}@grasp.upenn.edu}}
+\thanks{We gratefully acknowledge partial support from NSF grants CSR-CPS
+0720801, IIS-0427313, NSF IIP-0742304, and IIS-0413138, ARO grant
+W911NF-05-1-0219, and ONR grant N00014-07-1-0829.} }
+
+
+\begin{document}
+
+
+
+\maketitle
+\thispagestyle{empty}
+\pagestyle{empty}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{abstract}
+
+
+\end{abstract}
+
+
+\section{INTRODUCTION}
+    \input{introduction.tex}
+
+\section{PROBLEM STATEMENT}
+    \input{problem_statement_2.tex}
+
+\section{MACRO-CONTINUOUS MODELS}
+    \input{system_models.tex}
+
+\section{RATE OPTIMIZATION}\label{sec:optimization}
+    \input{optimization.tex}
+
+\section{RESULTS}
+\input{results.tex}
+
+TODO- can do top down design (REAL)
+
+TODO- optimization helps (REAL)
+
+%\subsection{Comparison with Deterministic Approach}
+
+\section{DISCUSSION AND FUTURE WORK}
+\input{conclusions.tex}
+
+- Optimizing the plan using an expanded model
+
+
+%<<<<<<< .mine
+%\bibliographystyle{IEEEtran}
+%\bibliography{IEEEabrv,icra09.bib}
+%=======
+\bibliographystyle{IEEEtran}
+\bibliography{icra09}
+%>>>>>>> .r90
+
+
+\end{document}

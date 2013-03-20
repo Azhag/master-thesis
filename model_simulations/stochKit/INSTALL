@@ -1,0 +1,13 @@
+
+	How to install StochKit on a Unix machine
+
+1. Download STOCHKIT.tar or STOCHKIT.tar.gz  
+2. To Build the STOCHKIT, use the the following command
+   * tar xvf STOCHKIT.tar or gtar xzvf STOCHKIT.tar.gz
+   * cd Stochkit
+   * make
+
+Option:
+3. install the parallel code 
+For the installation of parallel code, please read the 
+StochKit/tools/MPItemplate/InstallPStaochkit

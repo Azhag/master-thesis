@@ -1,0 +1,14 @@
+@model:2.1.1=ImmigrationDeath
+@units
+ substance=item
+@compartments
+ Cell
+@species
+ Cell:X=0 s
+@reactions
+@r=Immigration
+ -> X
+ lambda : lambda=1
+@r=Death
+ X ->
+ mu*X : mu=0.1

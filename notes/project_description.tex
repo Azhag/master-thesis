@@ -1,0 +1,245 @@
+%description: Project definition of the Puzzle test-case
+
+\documentclass[letterpaper, oneside]{article}
+
+\usepackage[utf8]{inputenc} 
+							
+\usepackage[T1]{fontenc}
+
+\usepackage{graphicx} % images
+\usepackage{geometry} % margins
+\usepackage{latexsym,amsfonts,amssymb, amsmath, amsthm}
+
+%\usepackage{subfigure} % several figures
+\usepackage{aeguill}  % bitmap fonts ©Ruffin
+
+\bibliographystyle{plain}
+
+%\frenchspacing
+
+\title{Stochastic assembly: a puzzle test-case}
+\date{\today}
+
+\newcommand{\loic}{Loïc Matthey}
+\newcommand{\spring}{Spring Berman}
+
+\author{\loic \and \spring} 
+
+\pagestyle{myheadings} 
+
+% headings
+\markright{\loic \ and \spring}
+
+%\addtolength{\textwidth}{1.5cm}
+%\addtolength{\hoffset}{-1.5cm}  
+%\addtolength{\voffset}{-1.5cm}
+%\setlength{\footskip}{0cm}
+
+\begin{document}
+
+
+%\landscape
+\maketitle
+
+% \vspace*{2pt}
+% 
+% \begin{center}
+% \begin{Large}
+% 	\textbf{Computational Molecular Biology}\\
+% \end{Large}
+% \vspace*{5pt}
+% \begin{large}
+% 	Homework \#7
+% \end{large}
+% 
+% \vspace*{3pt}
+% 
+% \aut
+% 
+% \end{center}
+
+%\tableofcontents   % table des matières
+%\setcounter{section}{1} 
+
+% Content
+\section{Problem description} % (fold)
+\label{sec:problem_description}
+
+\subsection{Complex System Modulation problem (Loïc's thesis)} % (fold)
+\label{sub:underlying_problem}
+Consider an intrinsic complex system with observable dynamics and a measurable performance metric. Let this intrinsic system attains an optimal performance metric value $X_{opt}$. Introduce agents into the system with designed specific behaviors, getting an augmented system. Can we design such behaviors so that the performance metric of the augmented system attains an optimal value $Y_{opt}$, with $Y_{opt} > X_{opt}$?
+% subsection underlying_problem (end)
+
+\subsection{Puzzle test-case} % (fold)
+\label{sub:puzzle_test_case}
+
+Consider the following task:
+\begin{itemize}
+	\item Let a puzzle of square shape, with area $5*5$, be constructed out of 5 pieces of area 5 each with different given shapes.
+	\item Let the final assembly shape $S$ of this puzzle be know.
+	\item Let the set of assembly plans $P$ leading to the final shape $S$ be known. 
+	\item Let the puzzle pieces assemble by bi-directional connections. One connection is enough for two pieces to be attached. These connection and their positions on the different pieces are known.
+	\item Pieces can be assembled and disassembled.
+	\item Consider an arena of sufficiently large size so that small scale interactions dynamics can be ignored.
+	\item Fill this arena with $N$ initial pieces of each shape.
+	\item Consider $M$ robots, able to pick up pieces and to make them assemble and disassemble.
+	\item Allow a recognition by the robots and by the pieces of the shapes and connection points when an encounter occur.
+	\item \textbf{Then:}\\
+	How can you manipulate those initial pieces so that after a time $T_f$, the number of assembled puzzles $X_S$ is maximized?
+\end{itemize}
+
+Consider two approaches for the robots behaviors:
+\begin{enumerate}
+	\item Stochastic interactions.
+	\begin{itemize}
+		\item The robots move randomly around the arena while carrying pieces.
+		\item They can not communicate outside of collision radius.
+		\item They know nothing or very little about the final assembly shape $S$ and the assembly plans $P$.
+		\item Assembly and disassembly of pieces is random, according to specific probabilities depending on the pieces. These probabilities can be influenced by the knowledge of the final assembly shape $S$ and assembly plans $P$ if available.
+	\end{itemize}
+	
+	\item Deterministic control-oriented.
+	\begin{itemize}
+		\item The robots move according to specific movement patterns.
+		\item They can communicate outside of collision radius, in a local range $R$.
+		\item They know completely about the assembly plans $P$ and the final assembly shape $S$.
+		\item They assemble and disassemble pieces according to their local knowledge of the environment and their internal knowledge.
+	\end{itemize}
+\end{enumerate}
+
+\subsubsection{Goal of test-case} % (fold)
+\label{ssub:goal_of_test_case}
+Compare the behavior of the two controllers with respect to the final number $X_S$ of assembled puzzles.
+Assert under which conditions the two different approaches are more interesting.
+
+Classical directions for the comparison can be:
+\begin{itemize}
+	\item Level of error in the system. Typical errors: bad assertion of pieces shapes and type, bad communication between errors, bad assembly of pieces, unknown initial conditions.
+	\item Complexity level of the robots and pieces. Typical capabilities: global positioning, computing power, communication range.
+\end{itemize}
+% subsubsection goal_of_test_case (end)
+
+\subsubsection{The assembly line problem} % (fold)
+\label{ssub:the_assembly_line_problem}
+\begin{itemize}
+	\item If we can control everything in our system, i.e. the level of error is almost zero, then why use stochasticity? More precisely, why disassemble things and not use the perfect assembly plan?
+	\item If we are at a high enough level of complexity, then classical deterministic methods which act optimally are obviously better.
+	\item Situations where this is not true anymore:
+		\begin{enumerate}
+			\item There is intrinsic stochasticity in the process, or we cannot control it completely. Examples: self-assembly at small-scale, which stochastic dynamics.
+			\item The agents make errors or the sensors are very poor. Then either you build a very robust controller or you try to correct those errors.
+			\item The initial condition and the final product is not known a-priori.
+		\end{enumerate}
+		Then in these situations, disassembly could be needed, and direct deterministic methods are less straightforward.
+\end{itemize}
+
+This is why a comparison according to specific environment conditions and available characteristics of the agents is needed.
+% subsubsection the_assembly_line_problem (end)
+
+\subsubsection{Reformulation in the Complex System Modulation problem} % (fold)
+\label{ssub:reformulation_in_the_complex_system_modulation_problem}
+
+\paragraph{Intrinsic system} % (fold)
+\label{par:intrinsic_system}
+\underline{Problem here:} we need an intrinsic system that is working on its own. So using dead-still pieces is out of question, they need to be able to move and bond randomly intrinsically.
+
+\underline{Solution:} The intrinsic system consists of the pieces and the robots with the ``Stochastic interaction'' behavior, with minimal design of this behavior.
+
+Then the system will intrinsically produce some final shape $X_S^i$.
+% paragraph intrinsic_system (end)
+
+\paragraph{Augmented system} % (fold)
+\label{par:augmented_system}
+The problem now is how to modify the behavior of the robots to obtain a new number of final shapes $X_S^a$, with $X_S^a > X_S^i$.
+
+This could be done either by introducing new robots having designed behaviors (enforcing the partition between the two systems components), or by altering the behavior of the intrinsic robots (allowing different levels of design, but breaking the distinction between the two systems).
+
+Typical new robots behaviors will be inspired by the Deterministic control-oriented behavior of the puzzle test-case.
+% paragraph augmented_system (end)
+% subsubsection reformulation_in_the_complex_system_modulation_problem (end)
+
+% subsection puzzle_test_case (end)
+
+% section problem_description (end)
+
+\section{Methodology and tools} % (fold)
+\label{sec:methodology_and_tools}
+
+\subsection{Robotic simulation} % (fold)
+\label{sub:robotic_simulation}
+Using Webots, construct the puzzle test-case for a given assembly shape $S$.
+
+\begin{itemize}
+	\item Connections are represented by magnetic bonds. Constraints on distance and angle ranges for connections,  as well as allowable shear and tearing forces can be defined.
+	\item Radio communication is available in Webots.
+\end{itemize}
+
+Construct the two behaviors and compare them following some metric and proposed comparison parameters.
+% subsection robotic_simulation (end)
+
+\subsection{Modeling} % (fold)
+\label{sub:modeling}
+
+\begin{itemize}
+	\item Use chemical reactions to represent the assembly plan.
+
+	Rates of reactions can be obtained either:
+	\begin{itemize}
+		\item As functions of geometric probabilities. For example, for two given pieces, define a probability of assembly depending on respective approaching angles and connections constraints.
+		\item Using Webots. Let the system run for some time while ensuring well-mixed properties. Measure the rates of reactions, that directly encompass the geometric characteristics.
+	\end{itemize}
+
+	\item Simulate this model by Stochastic Simulation, and Hybrid Modeling. Compare the results.
+	\item Use the model to determine ways of modifying the augmented system for optimal yield $X_S^a$.	
+\end{itemize}
+
+% subsection modeling (end)
+% section methodology_and_tools (end)
+
+\section{Examples of Complex System Modulation instances} % (fold)
+\label{sec:other_examples_of_the_complex_system_modulation_problem}
+
+\subsection{Nanoscale self-assembly} % (fold)
+\label{sub:nanoscale_self_assembly}
+The intrinsic system consists of the possible interactions and bonds. The augmented system can be abstracted as any modification applied to the system, that modify the intrinsic behavior.
+
+For example, changing the pH of the solution so as to activate different sticking surfaces is an action of the augmented system. Mixing the solution in a specific way, to improve aggregation in a specific area, is another possible action.
+The goal is then to produce such actions so that the new yield $X_S^a$ is optimal.
+% subsection nanoscale_self_assembly (end)
+
+\subsection{LEURRE project} % (fold)
+\label{sub:leurre_project}
+LEURRE is a project on building and controlling mixed societies composed of animals and artificial agents [1][2]. They built a small robot capable of infiltrating a cockroach group. The cockroach group is put in a arena with several shelters of specific luminosity. Cockroaches decides under which shelter to go according to the luminosity and the number of cockroaches under it. This is a self-organized decision process.
+The robot were able to infiltrate this group and to direct the global decision of the group. With infiltrated robots, they were able to force cockroaches to go under a light shelter, a configuration which was never attained with the cockroaches group only.
+
+\begin{description}
+	\item[Intrinsic system:] the cockroach group. The metric is the probability of the different shelters as final decision.
+	\item[Augmented system:] the cockroaches and the robots. The robots choose a different shelter, this action in turn modify the final probability of the shelters.
+\end{description}
+% subsection leurre_project (end)
+
+\subsection{Enzymes} % (fold)
+\label{sub:enzymes}
+\begin{description}
+	\item[Intrinsic system:] The original chemical reaction, with specific activation energy and rates.
+	\item[Augmented system:] The catalyzed chemical reaction with the introduction of the enzyme. The enzyme performs an action (binding with change of conformation) that helps the chemical reaction.
+\end{description}
+
+% subsection enzymes (end)
+
+\subsection{RNA translation into proteins} % (fold)
+\label{sub:protein_biosynthesis}
+\begin{description}
+	\item[Intrinsic system:] Ribosomes assemble AA according to the RNA code. The obtained first structure protein then folds itself into a specific conformation.
+	\item[Augmented system:] Chaperone protein helps the folding of the protein, possibly modifying the obtained conformation or allowing the initial one under different environment conditions (heat-shock response).
+\end{description}
+
+% subsection protein_biosynthesis (end)
+% section other_examples_of_the_complex_system_modulation_problem (end)
+
+%\vspace{3em}
+
+\noindent[1] LEURRE homepage. http://leurre.ulb.ac.be \\
+\noindent[2] Halloy et al. ``Social Integration of Robots into Groups of Cockroaches to Control Self-Organized Choices'' Science (2007).
+
+\end{document}

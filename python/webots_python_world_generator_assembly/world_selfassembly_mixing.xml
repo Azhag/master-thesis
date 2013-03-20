@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	TODO XML Schema to be defined 
+-->
+<PuzzleWorld>
+	<Arena>
+		<Shape>hexagon</Shape>
+		<Size>3.0</Size>
+	</Arena>
+	<Pieces nbBlocks="5">
+		<Piece>
+			<Type>1</Type>
+			<NumberInstances>3</NumberInstances>
+			<Controller>piece_random</Controller>
+			<InitialPosition>random</InitialPosition>
+		</Piece>
+		<Piece>
+			<Type>2</Type>
+			<NumberInstances>6</NumberInstances>
+			<Controller>piece_random</Controller>
+			<InitialPosition>random</InitialPosition>
+		</Piece>
+		<Piece>
+			<Type>3</Type>
+			<NumberInstances>3</NumberInstances>
+			<Controller>piece_random</Controller>
+			<InitialPosition>random</InitialPosition>
+		</Piece>
+		<Piece>
+			<Type>4</Type>
+			<NumberInstances>3</NumberInstances>
+			<Controller>piece_random</Controller>
+			<InitialPosition>random</InitialPosition>
+		</Piece>
+	</Pieces>
+<!-- <Supervisor>
+			<Controller>supervisor_random_move</Controller>
+		</Supervisor> -->
+</PuzzleWorld>

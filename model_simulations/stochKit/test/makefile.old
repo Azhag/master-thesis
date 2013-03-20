@@ -1,0 +1,22 @@
+DIMER_DIR =  DIMER
+SCHLOGL_DIR =  SHCLOGL
+HSR_DIR =  HSR
+
+TS = Dimer Schlogl Heatshock 
+
+all: $(TS)
+
+Dimer: 
+	cd ./$(DIMER_DIR); make; 
+
+Schlogl: 
+	cd ./$(SCHLOGL_DIR); make; 
+
+Heatshock: 
+	cd ./$(HSR_DIR); make; 
+
+clean: 
+	cd ./$(DIMER_DIR); make clean; 
+	cd ./$(SCHLOGL_DIR); make clean; 
+	cd ./$(HEATSHOCK_DIR); make clean; 
+

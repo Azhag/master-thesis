@@ -1,0 +1,264 @@
+DEF P_$num CustomRobot {
+  name "p${piece_type}_${num}"
+  controller "${controller}"
+  translation $x 0 $y
+  rotation 0 1 0 $theta
+  children [
+	GPS {
+      name "gps"
+    }
+    DEF RS232_OUT Emitter {
+      name "rs232_out"
+      range 0.4
+      channel 1
+      baudRate 57600
+    }
+    DEF RS232_IN Receiver {
+      name "rs232_in"
+      channel 1
+      baudRate 57600
+    }
+    DEF FOOT1 Solid {
+      translation 0.0275 0.009 0.0075
+      rotation 1 0 0 3.14
+      children [
+        DEF F1_SHAPE Shape {
+          geometry Cone {
+            bottomRadius 0.002
+            height 0.002
+          }
+        }
+      ]
+      boundingObject Transform {
+        translation 0 0.001 0
+        children [
+          Sphere {
+            radius 0.0007
+          }
+        ]
+      }
+      physics Physics {
+        density -1
+        mass 0.0005
+        coulombFriction ${coulombFriction}
+      }
+    }
+    DEF FOOT2 Solid {
+      translation -0.0275 0.009 0.0075
+      rotation 1 0 0 3.14
+      children [
+        USE F1_SHAPE
+      ]
+      boundingObject Transform {
+        translation 0 0.001 0
+        children [
+          Sphere {
+            radius 0.0007
+          }
+        ]
+      }
+      physics Physics {
+        density -1
+        mass 0.0005
+        coulombFriction ${coulombFriction}
+      }
+    }
+    DEF FOOT3 Solid {
+      translation -0.0275 0.009 -0.0075
+      rotation 1 0 0 3.14
+      children [
+        USE F1_SHAPE
+      ]
+      boundingObject Transform {
+        translation 0 0.001 0
+        children [
+          Sphere {
+            radius 0.0007
+          }
+        ]
+      }
+      physics Physics {
+        density -1
+        mass 0.0005
+        coulombFriction ${coulombFriction}
+      }
+    }
+    DEF FOOT4 Solid {
+      translation 0.0275 0.009 -0.0475
+      rotation 1 0 0 3.14
+      children [
+        USE F1_SHAPE
+      ]
+      boundingObject Transform {
+        translation 0 0.001 0
+        children [
+          Sphere {
+            radius 0.0007
+          }
+        ]
+      }
+      physics Physics {
+        density -1
+        mass 0.0005
+        coulombFriction ${coulombFriction}
+      }
+    }
+    DEF FOOT5 Solid {
+      translation 0.0125 0.009 -0.0475
+      rotation 1 0 0 3.14
+      children [
+        USE F1_SHAPE
+      ]
+      boundingObject Transform {
+        translation 0 0.001 0
+        children [
+          Sphere {
+            radius 0.0007
+          }
+        ]
+      }
+      physics Physics {
+        density -1
+        mass 0.0005
+        coulombFriction ${coulombFriction}
+      }
+    }
+    DEF FOOT6 Solid {
+      translation 0.0125 0.009 -0.0075
+      rotation 1 0 0 3.14
+      children [
+        USE F1_SHAPE
+      ]
+      boundingObject Transform {
+        translation 0 0.001 0
+        children [
+          Sphere {
+            radius 0.0007
+          }
+        ]
+      }
+      physics Physics {
+        density -1
+        mass 0.0005
+        coulombFriction ${coulombFriction}
+      }
+    }
+    DEF C1 Connector {
+      translation -0.01 0.021 0
+      rotation 1 0 0 -1.57
+      children [
+        DEF C1_SH Transform {
+          translation 0 0 -0.0005
+          rotation 1 0 0 1.57
+          children [
+            Shape {
+              geometry Cylinder {
+                height 0.001
+                radius 0.005
+                subdivision 16
+              }
+            }
+          ]
+        }
+      ]
+      name "c1"
+      boundingObject USE C1_SH
+      unilateralLock FALSE
+      distanceTolerance 0.02
+      rotationTolerance 1.57
+      numberOfRotations 0
+    }
+    DEF C2 Connector {
+      translation -0.016 0.01625 -0.011
+      rotation 0 1 0 3.1415
+      children [
+        DEF C1_SH Transform {
+          translation 0 0 -0.0005
+          rotation 1 0 0 1.57
+          children [
+            Shape {
+              geometry Cylinder {
+                height 0.001
+                radius 0.005
+                subdivision 16
+              }
+            }
+          ]
+        }
+      ]
+      name "c2"
+      boundingObject USE C1_SH
+      unilateralLock FALSE
+      distanceTolerance 0.02
+      rotationTolerance 1.57
+      numberOfRotations 0
+    }
+    DEF SH_PIECE_4 Transform {
+      translation 0 0.015 0
+      children [
+        Group {
+          children [
+            Transform {
+              translation 0.02 0 -0.03
+              rotation 0 1 0 1.571
+              children [
+                Shape {
+                  appearance Appearance {
+                    material Material {
+                      diffuseColor 0 0.501961 0
+                      transparency 0.4
+                    }
+                  }
+                  geometry Box {
+                    size 0.04 0.01 0.02
+                  }
+                }
+              ]
+            }
+            Transform {
+              children [
+                Shape {
+                  appearance Appearance {
+                    material Material {
+                      diffuseColor 0 0.501961 0
+                      transparency 0.4
+                    }
+                  }
+                  geometry Box {
+                    size 0.06 0.01 0.02
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+  boundingObject Group {
+    children [
+      Transform {
+        translation 0 0.015 0
+        children [
+          Box {
+            size 0.06 0.01 0.02
+          }
+        ]
+      }
+      Transform {
+        translation 0.02 0.015 -0.03
+        children [
+          Box {
+            size 0.02 0.01 0.04
+          }
+        ]
+      }
+    ]
+  }
+  physics Physics {
+    density -1
+    mass 0.005
+    bounce 0.1
+	centerOfMass 0 0.015 -0.02
+  }
+}

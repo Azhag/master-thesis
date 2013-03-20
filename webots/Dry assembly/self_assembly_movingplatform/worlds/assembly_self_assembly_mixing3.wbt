@@ -1,0 +1,333 @@
+#VRML_SIM V5.0 utf8
+#000000
+#!mainWindow: 0.00277778 0 0.494444 0.675676
+#!sceneTreeWindow: 0.0423611 0.556511 0.402778 0.361179 0.253472
+#!textEditorWindow: 0.50625 0 0.486111 0.898034 0.347222
+#!logWindow: 0.513194 0.756757 0.467361 0.238329
+#!robotWindow: "" 0.536111 0.0933661 0.277778 0.737101 0
+
+WorldInfo {
+  info [
+    "Created using Webots Python World Generator (WebotsPWG)"
+    "Author: Loic Matthey, loic.matthey@epfl.ch"
+    "Date: 2008-05-30"
+  ]
+  basicTimeStep 16
+}
+Viewpoint {
+  orientation -0.467753 0.791938 0.39248 1.59409
+  position 4.40249 6.61773 1.21384
+}
+Background {
+  skyColor [
+    0.4 0.7 1
+  ]
+}
+DirectionalLight {
+  direction -0.5 -1 -0.5
+  intensity 0.5
+}
+PointLight {
+  ambientIntensity 0.5
+  attenuation 1 1 1
+  intensity 0.5
+  location 0 0.5 0
+  radius 5
+}
+PointLight {
+  ambientIntensity 0.5
+  attenuation 1 1 1
+  intensity 0.5
+  location 2.25 0.5 2.25
+  radius 5
+}
+PointLight {
+  ambientIntensity 0.5
+  attenuation 1 1 1
+  intensity 0.5
+  location -2.25 0.5 -2.25
+  radius 5
+}
+PointLight {
+  ambientIntensity 0.5
+  attenuation 1 1 1
+  intensity 0.5
+  location 2.25 0.5 -2.25
+  radius 5
+}
+PointLight {
+  ambientIntensity 0.5
+  attenuation 1 1 1
+  intensity 0.5
+  location -2.25 0.5 2.25
+  radius 5
+}
+DEF GROUND Solid {
+  translation 0 -0.3 0
+  children [
+    DEF ground_shape Shape {
+      geometry Box {
+        size 10 0.1 10
+      }
+    }
+  ]
+  boundingObject USE ground_shape
+}
+DEF PLATFORM CustomRobot {
+  children [
+    DEF platform_foot Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.333333 0.258824 0.8
+        }
+      }
+      geometry Box {
+        size 4 0.5 4
+      }
+    }
+    Servo {
+      translation 0 0.4 0
+      rotation 1 0 0 1.5708
+      children [
+        Transform {
+          children [
+            DEF platform_movable Shape {
+              geometry Box {
+                size 3 3 0.1
+              }
+            }
+          ]
+        }
+      ]
+      name "platform_servo"
+      boundingObject USE platform_movable
+      type "linear"
+    }
+  ]
+  boundingObject USE platform_foot
+  physics Physics {
+    density -1
+    mass 100
+    bounce 0
+    coulombFriction 1000
+  }
+  controller "platform"
+}
+Solid {
+  translation 0 1.97676 0
+  children [
+    DEF piece_sh Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.329412 0.454902 0.8
+          transparency 0.3
+        }
+      }
+      geometry Box {
+        size 0.07 0.1 0.17
+      }
+    }
+  ]
+  boundingObject USE piece_sh
+  physics Physics {
+    density -1
+    mass 0.1
+    forceDependentSlip 0.5
+  }
+}
+Solid {
+  translation 0 0.5 0
+  children [
+    Transform {
+      children [
+        DEF HOLE_SHAPE Group {
+          children [
+            Transform {
+              translation 0.1 0.1125 0
+              rotation 1 0 0 1.57
+              children [
+                Shape {
+                  geometry Cylinder {
+                    height 0.3
+                    radius 0.05
+                    subdivision 8
+                  }
+                }
+              ]
+            }
+            Transform {
+              translation -0.1 0.1125 0
+              rotation 1 0 0 1.57
+              children [
+                Shape {
+                  geometry Cylinder {
+                    height 0.3
+                    radius 0.05
+                    subdivision 8
+                  }
+                }
+              ]
+            }
+            Transform {
+              translation 0 0.1125 0.15
+              rotation 0 0 1 1.57
+              children [
+                Shape {
+                  geometry Cylinder {
+                    height 0.2
+                    radius 0.05
+                    subdivision 8
+                  }
+                }
+              ]
+            }
+            Transform {
+              translation 0 0.1125 -0.15
+              rotation 0 0 1 1.57
+              children [
+                Shape {
+                  geometry Cylinder {
+                    height 0.2
+                    radius 0.05
+                    subdivision 8
+                  }
+                }
+              ]
+            }
+            Transform {
+              translation 0.1 0 0
+              children [
+                Shape {
+                  geometry Box {
+                    size 0.1 0.2333 0.4
+                  }
+                }
+              ]
+            }
+            Transform {
+              translation -0.1 0 0
+              children [
+                Shape {
+                  geometry Box {
+                    size 0.1 0.2333 0.4
+                  }
+                }
+              ]
+            }
+            Transform {
+              translation 0 0 0.15
+              rotation 0 1 0 1.5707
+              children [
+                Shape {
+                  geometry Box {
+                    size 0.1 0.23333 0.1
+                  }
+                }
+              ]
+            }
+            Transform {
+              translation 0 0 -0.15
+              rotation 0 1 0 1.5707
+              children [
+                Shape {
+                  geometry Box {
+                    size 0.1 0.23333 0.1
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+    Solid {
+      translation 0 0 0.25
+      rotation 0 1 0 1.5707
+      children [
+        USE HOLE_SHAPE
+      ]
+      boundingObject USE HOLE_SHAPE
+  physics Physics {
+    mass 10
+  }
+    }
+    Solid {
+      translation 0 0 -0.25
+      rotation 0 1 0 1.5707
+      children [
+        USE HOLE_SHAPE
+      ]
+      boundingObject USE HOLE_SHAPE
+  physics Physics {
+    mass 10
+  }
+    }
+    Solid {
+      translation 0 0 -0.5
+      children [
+        USE HOLE_SHAPE
+      ]
+      boundingObject USE HOLE_SHAPE
+  physics Physics {
+    mass 10
+  }
+    }
+    Solid {
+      translation 0 0 -0.75
+      rotation 0 1 0 1.5707
+      children [
+        USE HOLE_SHAPE
+      ]
+      boundingObject USE HOLE_SHAPE
+  physics Physics {
+    mass 10
+  }
+    }
+    Solid {
+      translation -0.25 0 0
+      rotation 0 1 0 1.5707
+      children [
+        USE HOLE_SHAPE
+      ]
+      boundingObject USE HOLE_SHAPE
+  physics Physics {
+    mass 10
+  }
+    }
+    Solid {
+      translation -0.25 0 -0.25
+      children [
+        USE HOLE_SHAPE
+      ]
+      boundingObject USE HOLE_SHAPE
+  physics Physics {
+    mass 10
+  }
+    }
+    Solid {
+      translation -0.25 0 -0.5
+      rotation 0 1 0 1.5707
+      children [
+        USE HOLE_SHAPE
+      ]
+      boundingObject USE HOLE_SHAPE
+  physics Physics {
+    mass 10
+  }
+    }
+    Solid {
+      translation -0.25 0 -0.75
+      children [
+        USE HOLE_SHAPE
+      ]
+      boundingObject USE HOLE_SHAPE
+  physics Physics {
+    mass 10
+  }
+    }
+  ]
+  boundingObject USE HOLE_SHAPE
+  physics Physics {
+    mass 10
+  }
+}

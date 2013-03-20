@@ -1,0 +1,52 @@
+\section{Problem overview} % (fold)
+\label{sec:problem_overview}
+
+	Self-assembly is everywhere.
+	
+	\paragraph{}
+
+	At every scale, systems interact, collaborate and combine to create new bigger scale systems. Crystals are formed by nanoscale assembly of carbon atoms, cell membranes by the arrangement of fatty acids into a lipid bilayer and human beings by the organization and cooperation of their trillions of living cells.
+
+	Yet this process, being maybe so general and vast, is still tremendously unknown.
+
+	The study of self-organizing systems gives insight into the organization patterns of their parts, and could help understanding and then modifying them.
+
+	The recent field of Swarm intelligence applies the self-organizing principle to many systems and applications, ranging from algorithmic procedures (routing of packets, meta heuristics) to team of multiple robots. This approach makes sense when the number of robots increases to the point where a centralized or classical control methodology is not tractable anymore.
+Interestingly, a similar problem occurs when the scale of robots and components starts to shrink down dramatically. If the environment is intrinsically random and unknown, the robustness factor promoted by self-organizing systems becomes a key factor.
+
+	\paragraph{}
+	Our interest goes towards that direction. We want to study systems whose dimension is shrinking to the level where classical approaches are not applicable anymore. Furthermore, we want to model those systems, and create a framework providing a complete control flow to modify the behavior of those systems.
+
+	This might seem fairly trivial, but when the system under consideration is hard to study by definition and not well-known, even the simplest control over them or insight in their behavior becomes an appreciable achievement.
+
+	\paragraph{}
+	Our approach is the following:
+	\begin{itemize}
+		\item We propose an abstract way of describing the problem under study and the actions needed to achieve its control. Our main claim is that it is possible to divide the problem into two parts: an intrinsic system, on which we have no control, and an augmented system, which encompass our additions and modifications made to modify the behavior.
+		\item We propose to use a Chemical Reaction Network mathematical framework through all this process to model the system under study. This framework will proves itself useful for its flexibility and expressive power at the scale we are studying.
+		\item We present a way to control the system via a Top-down design approach, first working on the model and then mapping it back onto the studied system. Top-down design peaks the interest nowadays, as being able to control a complex system using high-level instructions only is a promising characteristic.
+		\item Everything is presented and verified by referring to a specific system that we create and study: a robotic platform performing a self-assembly of products.
+	\end{itemize}
+	
+	We call it the \textbf{Hybrid Reactions Modeling for Top-down Design Framework} (HyRToD). ``Hybrid'' because we will use both ordinary differential equations approximations and stochastic simulations to simulate the model, depending on the context.
+	
+	The robotic platform is actually simulated on a computer, by using a realistic 3D physics simulator named Webots~\cite{Michel:2004p10762}. Webots is based on ODE, an open source physics engine for simulating 3D rigid body dynamics~\cite{ode}. Such a simulator allows us to performs systematic experiments faster than real-time and with null fabrication costs.
+	
+	This might seems strange to apply a framework we claim to be thought for micrometer scale dynamics onto a high level robotic platform. We actually design the robotic platform to give it characteristics usually shown at a smaller scale, and therefore only take advantage of the robotic platform as a model system easy to measure and modify. This work focuses on this robotic platform as a first test for our framework. Further works will consider smaller scale applications to assess our initial assumption on our framework.
+	
+\subsection{Relations to biological processes} % (fold)
+\label{sub:relations_to_biological_processes}
+	Even though we apply our method to a robotic implementation, a fairly high scale system by all means, we claim that this method is applicable to many different systems, especially the ones governed by random dynamics.
+	
+	We chose to create a robotic platform performing a self-assembly task on purpose. Having robots carrying the building blocks and assembling them can be thought of as an idealization of the self-assembly process taking place into the cell, for example the protein synthesis. If we allow the building blocks to move around and assemble on their own, the added robots will behave like enzymes, promoting some reactions.
+	
+	Moreover, our method, using a Chemical Reaction Network model, is very easy to apply on biological processes. This model has been extensively used in the study of biological systems, and is very well understood by the community working in this field. This is an added factor to the development of further interdisciplinary cooperations between engineering and life sciences.
+% subsection relations_to_biological_processes (end)
+
+
+% section problem_overview (end)
+
+\section{Outline} % (fold)
+\label{sec:outline}
+	This report is organized as follows: Chapter~\ref{cha:project_description} defines precisely our goals and the abstract problem definition and control flow we aim to study. Chapter~\ref{cha:field_overview} goes over the theoretical notions used in our work, and gives pointers to the available literature on the subject. Chapter~\ref{cha:puzzle_test_case_implementation} presents extensively the specific system we are studying, namely the physical robotic simulation of an assembly task. Chapter~\ref{cha:mathematical_model_of_the_puzzle_test_case} introduces the representation of our specific system into a Chemical Reaction Network notation, presents how we fitted the free parameters and compare the simulated results with the physical measurements. Chapter~\ref{cha:chemical_reaction_networks_control_and_design} is dedicated to the optimization step applied on our mathematical model in order to control its behavior. Chapter~\ref{cha:augmented_assembly_implementation} presents the Top-down mapping of the modified model towards the physical system. Chapter~\ref{cha:conclusion_and_outlook} concludes the work and assess its validity and shortcomings.
+% section outline (end)

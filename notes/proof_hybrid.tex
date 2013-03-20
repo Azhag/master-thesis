@@ -1,0 +1,168 @@
+%description: Discussion over the proof of convergence of Hybrid System wrt Stochastic Simulation.
+
+\documentclass[letterpaper, oneside]{article}
+
+%\usepackage[frenchb]{babel}
+
+\usepackage[utf8]{inputenc} % encoding = latin1 ou utf8x avec le package ucs chargé.
+							  % 'applemac' = ?!? (et inutilisable quasi-partout)
+\usepackage[T1]{fontenc}
+
+%\usepackage{portland} % permet d'utiliser le mode portrait
+\usepackage{graphicx} % permet d'inclure des images
+\usepackage{geometry} % Définir les marges
+\usepackage{latexsym,amsfonts,amssymb, amsmath, amsthm}
+
+%\usepackage{subfigure} % Plusieurs figures sur la même ligne.
+%\usepackage{here} %positionnement H.
+%\usepackage{aeguill}  % sans ça, fontes bitmap affreuses ©Ruffin
+
+%\usepackage{ulem} % double soulignement
+
+\bibliographystyle{plain}
+
+%\frenchspacing
+
+\title{Discussion on the convergence of Hybrid Stochastic-Deterministic approximations toward exact Stochastic Simulation for chemical processes}
+\date{\today}
+
+\newcommand{\loic}{Loïc Matthey}
+
+\author{\loic \\
+\texttt{loic.matthey@epfl.ch}} 
+
+\pagestyle{myheadings} 
+
+% hauts de page
+\markright{\loic}
+
+%\addtolength{\textwidth}{1.5cm}
+%\addtolength{\hoffset}{-1.5cm}  
+%\addtolength{\voffset}{-1.5cm}
+%\setlength{\footskip}{0cm}
+
+\begin{document}
+
+
+%\landscape
+\maketitle
+
+% \vspace*{2pt}
+% 
+% \begin{center}
+% \begin{Large}
+% 	\textbf{Computational Molecular Biology}\\
+% \end{Large}
+% \vspace*{5pt}
+% \begin{large}
+% 	Homework \#7
+% \end{large}
+% 
+% \vspace*{3pt}
+% 
+% \aut
+% 
+% \end{center}
+
+% génére le titre
+%\tableofcontents   % table des matières
+%\setcounter{section}{1} 
+
+% Content
+
+\section{Introduction} % (fold)
+\label{sec:introduction}
+The simulation of chemical processes by means of precise stochastic simulations received a growing attention in recent years \cite{Gillespie:2007p1788}. Being able to capture the behavior of small number of molecules in microscopic systems promise useful insight in new field, for example system biology.
+
+Nowadays, simulation of multiscale systems have become the new interest. A multiscale system is characterized either on the timescale aspect or the copy number of reactants \cite{Cao:2008p5942}.
+\begin{enumerate}
+	\item For the timescale aspect, the different scales arise when some reactions are much faster than others. They then quickly reach a stable state, and the global dynamics of the system is driven by the slow reactions.
+	\item For the copy number of reactants, the difference comes from the relative size of the populations. Species with a small population are best viewed as discrete stochastic processes, while the large populations should follow a deterministic model. 
+\end{enumerate}
+
+Exact simulation of stochastic reactions is possible using Gillespie's stochastic simulation algorithm (SSA)\cite{Gillespie:2007p1788}. But being exact, it simulates all reactions, and is therefore highly inefficient when the number of reactants and reaction channels increase or to simulate multiscale systems. Numerous attempts to optimize it have been proposed over the years. Continuing his work on the SSA, Gillespie proposed the tau-leaping optimization.
+
+\subsection{Tau-leaping} % (fold)
+\label{sub:tau_leaping}
+The tau-leaping optimization goal is to make the system evolve for a time $\tau$ where a certain amount of reactions fire instead of simulating every reaction. It is based on the assumption that the propensity functions $a_j(x)$, governing the rates of firing of the reactions, stays nearly constant for a certain time $\tau$. It is then possible to approximate the number of reaction firings during that time $\tau$ by a Poisson process of rate $a_j(x) \tau$.
+
+Automatic ways of finding $\tau$ have been proposed \cite{Cao:2006p6200}.
+
+Other variations of the tau-leaping have been proposed: Implicit tau-leaping (performs better for stiff systems), Trapezoidal tau-leaping (more efficient than explicit tau-leaping), and the latest explicit-implicit tau-leaping (combination of the two regimes) \cite{Cao:2007p5660}.
+
+% subsection tau_leaping (end)
+
+To simulate multiscale systems with different timescales, Gillespie proposed the Slow Scale Stochastic Simulation Algorithm (ssSSA).
+
+\subsection{ssSSA} % (fold)
+\label{sub:ssssa}
+This algorithm uses a quasy steady-state approximation for the fast reactions of the system. The algorithm explicitly simulates only the slow reactions, the fast ones take values governed by steady-states assumptions of convergence. Gillespie defines for that virtual fast processes, that are not touched by the slow reactions. These virtual fast processes can then gives the new populations for the fast species, without simulating them explicitly.
+% subsection ssssa (end)
+
+Other ways of simulating multiscale systems have been proposed. One of them, by Haseltine et al. \cite{Haseltine:2002p4632}, propose to simulate the fast reactions using a Deterministic approximation. The goal is to replace the stochastic processes of the fast reactions with big population by an ODE. In this manner, fast simulation of the fast reactions can be attained, while keeping stochastic simulations for the slow reactions. This Stochastic-deterministic approximation may still pose some convergence problems, as no real proofs of convergence toward the stochastic averages of the initial fully stochastic system have been provided.
+
+We will now discuss some results considering this convergence and the assumptions that would be needed.
+% section introduction (end)
+
+\section{Proofs of convergence of multiscale approximations to exact stochastic simulations} % (fold)
+\label{sec:proofs_of_convergence_of_multiscale_approximations_to_exact_stochastic_simulations}
+
+\subsection{Gillespie's work} % (fold)
+\label{sub:gillespie_s_work}
+Gillespie has provided extended manipulations of the stochastic kinetics that governs the chemical reactions \cite{Gillespie:2007p1788}. Starting from the Chemical Master Equation (CME), he derived an equation consisting of a deterministic drift term and a stochastic diffusion term proportional to Gaussian white noise, known as Chemical Langevin Equation (CLE). The resulting process is a Continuous Markov process.
+
+The hypothesis $a_j(x) \tau \gg 1 \quad \forall j=1,\dots, M$ is needed to perform this derivation. This may require attention, as it is in opposition with the initial condition that $\tau$ should be small enough so that the propensity functions $a_j(x)$ stay constant.
+
+When then taking the CLE toward the thermodynamic limit ($X_i \rightarrow \infty, \Omega \rightarrow \infty, X_i/\Omega = const_i, \forall i$), the Gaussian noise disappear, leaving only the deterministic drift. This bring us back to a complete ODE model, the Reaction Rate Equations (RRE).
+
+Concerning multiscale systems, Gillespie's work is concerned about the timescale aspect. The ssSSA partition populations based on the speed of reactions, and replace the fast reactions by real values estimated using first and second moments of a virtual fast process. This rely on a slow-scale approximation lemma \cite{Cao:2005p5664}\cite{Gillespie:2007p5659}.
+
+As Gillespie does not use an ODE to represent the slow scale reactions, he does not provide us with a direct proof of Hybrid systems usability. But building upon the tau-leaping to CME derivation can give us some ideas:
+
+\paragraph{Tau-leaping to ODE} % (fold)
+\label{par:tau_leaping_to_ode}
+If the tau-leaping condition is satisfied (no propensity function $a_j(x)$ change significantly during $\tau$), we have the following equation for the system \cite{Gillespie:2007p1788}:
+\[
+X(t+ \tau) = X(t) + \sum_{j=1}^M P_j(a_j(X(t))\tau) v_j	
+\]
+Where $P_j(m_j)$ is a statistically independent Poisson random variable with mean (and variance) $m_j$, $M$ is the number of reaction channel and $v_j$ the change vector associated with a reaction channel.
+
+Then, if the population of all reactant species are sufficiently large, the Poisson random variable $P(a_j(x)\tau)$ can be approximated by its mean $a_j(x)\tau$ (from \cite{Cao:2007p5660}). We then have:
+
+\[
+	X(t + \tau) = X(t) + \sum_{j=1}^M a_j(X(t))\tau v_j
+\]
+Which is just the explicit Euler integration scheme for a timestep $\tau$ and the deterministic ODE $\dot{X}= \sum_{j=1}^M a_j(x) v_j$.
+
+So we can reduce the tau-leaping to an ODE, assuming our condition on the Poisson process approximation is applicable.
+% paragraph tau_leaping_to_ode (end)
+
+% subsection gillespie_s_work (end)
+
+\subsection{Population sizes} % (fold)
+\label{sub:population_sizes}
+Following the proof presented in the Textbook from J.Y. Le Boudec, for the course ``Modelling the Immune System'' given at EPFL \cite{LCA-TEACHING-2007-001} (pages 19--22) we have the following properties:
+
+The forward equation of chemical reactions, derived from the CME, can be written as:
+\[
+	\frac{d\bar{x}_s}{dt} = \sum_{j=1}^M E(a_j(\vec{X}(t))) v_{j,s}
+\]
+Where $\bar{x}_s = E(X_i)$. If we can neglect the variability of $X_s$ around its mean, we replace $E(a_j(\vec{X}(t)))$ by $a_j(E(\vec{X}(t)))$ and thus have the following associated ODE:
+
+\[
+	\frac{d\vec{x}}{dt} = \sum_{j=1}^M a_j(\vec{x}) v_{j,s}
+\]
+Such an associated ODE is shown to be accurate if a reaction population is large and the increase or decrease due to one reaction is small (see \cite{LCA-TEACHING-2007-001}).
+
+Then when presenting Hybrid systems, the lecturer assert that, for multiscale systems with reactions that satisfies the conditions for the associated ODE to be accurate, we can replace these reactions by the associated ODE. The rest of the reactions, the slow ones, are to be simulated using stochastic simulation.
+
+A real proof of this last step is still missing. But the idea that we are only replacing populations that are big enough and with small enough variations is the center argument.
+Another derivation of the ODE replacement for fast reactions can be found in the paper by Haseltine et al.\cite{Haseltine:2002p4632}. By partitioning the reactions, he shows that the Master Equation can be divided in two parts, slow and fast reactions, which can then be simulated separately. Such a derivation may however pose some problems, more reading is needed on this subject.
+% subsection population_sizes (end)
+
+
+% section proofs_of_convergence_of_multiscale_approximations_to_exact_stochastic_simulations (end)
+
+\bibliography{papers_bib}
+
+\end{document}

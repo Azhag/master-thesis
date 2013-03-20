@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbml xmlns="http://www.sbml.org/sbml/level1" level="1" version="1">
+<model name="Schlogl">
+
+	<listOfSpecies>
+	 <specie name="S1" compartment="Schlogl" initialAmount="250" boundaryCondition="false" />
+	</listOfSpecies>
+	
+	<listOfReactions>
+	 <reaction name="Reaction1" reversible="false">
+	   <listOfReactants>
+	     <specieReference specie="S1" stoichiometry="2"/>			
+	   </listOfReactants>
+	   
+	   <listOfProducts>	
+	     <specieReference specie="S1" stoichiometry="3"/>			
+	   </listOfProducts>
+	   
+	   <kineticLaw formula="(c1/2.0)*S1*(S1-1)">	
+	     <listOfParameters>
+	       <parameter name="c1" value="0.03"/>
+	     </listOfParameters>		
+	   </kineticLaw>
+	 </reaction>
+	
+	 <reaction name="Reaction2" reversible="false">
+	   <listOfReactants>
+	     <specieReference specie="S1" stoichiometry="3"/>			
+	   </listOfReactants>
+	   
+	   <listOfProducts>	
+	     <specieReference specie="S1" stoichiometry="2"/>			
+	   </listOfProducts>
+	   
+	   <kineticLaw formula="(c2/6.0)*S1*(S1-1)*(S1-2)">	
+	     <listOfParameters>
+	       <parameter name="c2" value="0.0001"/>
+	     </listOfParameters>		
+	   </kineticLaw>
+	 </reaction>
+	
+	 <reaction name="Reaction3" reversible="false">
+	   <listOfReactants>
+	   </listOfReactants>
+	   
+	   <listOfProducts>
+	     <specieReference specie="S1" stoichiometry="1"/>
+	   </listOfProducts>
+	   
+	   <kineticLaw formula="c3">
+	     <listOfParameters>
+	       <parameter name="c3" value="200"/>
+	     </listOfParameters>
+	   </kineticLaw>
+	 </reaction>
+
+	 <reaction name="Reaction4" reversible="false">
+	   <listOfReactants>
+	     <specieReference specie="S1" stoichiometry="1"/>
+	   </listOfReactants>
+	   
+	   <listOfProducts>	
+	   </listOfProducts>
+	   
+	   <kineticLaw formula="c4*S1">	
+	     <listOfParameters>
+	       <parameter name="c4" value="3.5"/>
+	     </listOfParameters>		
+	   </kineticLaw>
+	 </reaction>
+	</listOfReactions>
+</model>
+</sbml>

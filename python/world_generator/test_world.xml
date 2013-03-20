@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	TODO XML Schema to be defined 
+-->
+<PuzzleWorld>
+	<Arena>
+		<Shape>square</Shape>
+		<Size>1.5</Size>
+	</Arena>
+	<!-- <Robots>
+				<Robot>
+							<NumberInstances>1</NumberInstances>
+							<Controller>void</Controller>
+							<InitialPosition><Coordinates>
+									<X>0.1</X>
+									<Y>0.1</Y>
+								</Coordinates></InitialPosition>
+						</Robot>
+				<Robot>
+					<NumberInstances>5</NumberInstances>
+					<Controller>locking_simple</Controller>
+					<InitialPosition>random</InitialPosition>
+				</Robot>
+		</Robots> -->
+	<Pieces nbBlocks="5">
+		<Piece>
+			<Type>1</Type>
+			<NumberInstances>10</NumberInstances>
+			<Controller>piece_random</Controller>
+			<InitialPosition>random</InitialPosition>
+		</Piece>
+		<Piece>
+			<Type>2</Type>
+			<NumberInstances>20</NumberInstances>
+			<Controller>piece_random</Controller>
+			<InitialPosition>random</InitialPosition>
+		</Piece>
+		<Piece>
+			<Type>3</Type>
+			<NumberInstances>10</NumberInstances>
+			<Controller>piece_random</Controller>
+			<InitialPosition>random</InitialPosition>
+		</Piece>
+		<Piece>
+			<Type>4</Type>
+			<NumberInstances>10</NumberInstances>
+			<Controller>piece_random</Controller>
+			<InitialPosition>random</InitialPosition>
+		</Piece>
+	</Pieces>
+	<!-- <Supervisor>
+			<Controller>supervisor_random_move</Controller>
+		</Supervisor> -->
+</PuzzleWorld>

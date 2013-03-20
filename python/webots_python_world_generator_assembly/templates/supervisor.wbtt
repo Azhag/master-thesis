@@ -1,0 +1,9 @@
+Supervisor {
+  children [
+  	Receiver {
+    	name "receiver"
+    	channel 2
+  	}
+  ]
+  controller "$controller"
+}

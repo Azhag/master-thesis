@@ -1,0 +1,45 @@
+#ifndef CSE_MATH_SOLVEGE_H
+#define CSE_MATH_SOLVEGE_H
+//*****************************************************************************|
+//*  FILE:    SolveGE.h
+//*
+//*  AUTHOR:  Andrew Hall
+//*
+//*  CREATED: January 26, 2003
+//*
+//*  LAST MODIFIED: Aug 9, 2004 
+//*             BY: Yang Cao
+//*             TO: Change the matrix storage order 
+//*
+//*  SUMMARY:
+//*
+//*
+//*  NOTES:
+//*
+//*
+//*  TO DO:
+//*
+//*
+//*****************************************************************************|
+//       1         2         3         4         5         6         7         8
+//345678901234567890123456789012345678901234567890123456789012345678901234567890
+#define USELAPACK
+#include "Matrix.h"
+#include "Vector.h"
+
+#ifdef USELAPACK //if we wanna use LAPACK, we should define it 
+#include "lafnames.h"       /* macros for LAPACK++ filenames */
+#include LA_GEN_MAT_DOUBLE_H
+#include LA_VECTOR_DOUBLE_H
+#include LA_SOLVE_DOUBLE_H
+#endif
+
+namespace CSE {
+  namespace Math {
+
+    void SolveGE(const Matrix& A, Vector &x, const Vector& b);
+
+  } // Close CSE::Math namespace
+} // Close CSE namespace
+
+#endif // CSE_MATH_SOLVEGE_H

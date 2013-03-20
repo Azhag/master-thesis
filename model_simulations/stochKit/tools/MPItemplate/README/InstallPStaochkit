@@ -1,0 +1,58 @@
+//******************************************************************************
+//*  FILE:  InstallPStaochkit
+//*
+//*  AUTHOR: HongLi
+//*
+//*  CREATED: Mar 06, 2005
+//*
+//*  LAST MODIFIED:
+//*             BY:
+//*             TO:
+//*  SUMMARY:
+//*
+//*
+//*  NOTES:
+//*
+//*
+//*
+//*  TO DO:
+//*
+//*
+//****************************************************************************|
+//        1         2         3         4         5         6         7         8
+//2345678901234567890123456789012345678901234567890123456789012345678901234567890
+
+User Installation Instructions for PStochkit
+
+1. Set environment variables
+
+  Set the environment in your .cshrc 
+   (.cshrc is for Cshell; for other shells, you may set the environment
+   in the corresponding profile) 
+
+  Set the environment variables to sepcify the default path for 
+  the mpich/mpi if the system didn't include this environment variable.
+
+  Example:
+    setenv PATH {$PATH}:/usr/local/mpich/bin/:.
+
+2. Prepare to use PStochKit 
+
+  Before using PStochkit, you should have installed StochKit.
+  For the installation of the STOCHKIT, see the STOCHKIT User's Guide.
+
+3.Compile the package
+
+  Compile all the libraries in this package.
+
+  1> Compile sprng for the parallel machines
+  
+      See the README for the SPRNG  StochKit/Math/sprng2.0
+
+2> Compile the Math lib and the StochRxn lib
+
+   Simply build the whole package.
+
+4. Write the parallel code with the template 
+
+  See details in the README for the parallel code

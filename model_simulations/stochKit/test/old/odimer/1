@@ -1,0 +1,83 @@
+0a1,24
+> //******************************************************************************
+> //*  FILE:   DimerStats.cpp
+> //*
+> //*  AUTHOR: HongLi
+> //*
+> //*  CREATED: Mar 06, 2005
+> //*
+> //*  LAST MODIFIED:
+> //*             BY:
+> //*             TO:
+> //*  SUMMARY:
+> //*
+> //*
+> //*  NOTES:
+> //*
+> //*
+> //*
+> //*  TO DO:
+> //*
+> //*
+> //****************************************************************************|
+> //        1         2         3         4         5         6         7         8
+> //2345678901234567890123456789012345678901234567890123456789012345678901234567890
+> 
+13a38,39
+> #include "Vector.h"
+> #include "Matrix.h"
+14a41
+> #include "StoreState.h"
+16d42
+< #include <iostream>
+17a44
+> #include <iostream>
+38c65,66
+<          std::cerr << "Usage:  dimerstats <# runs> <output file>";
+---
+>          std::cerr << "Usage:  dimerstats <# runs>"
+> 		 		   <<"<output file>";
+43c71
+<          outFile = argv[2];
+---
+> 	 outFile = argv[2];
+45c73
+< 
+---
+>       
+53a82
+>       //ReactionSet rxns(nu, Propensity, PropensityJacobian);
+56,59c85,90
+<       SolverOptions opt ;//= ConfigStochRxn(1,"ossa");
+<       opt.stepsize_selector_func = OSSADirect_Stepsize; 
+<       opt.single_step_func = OSSA_SingleStep; 
+<       opt.progress_interval = 10000000L;
+---
+>       SolverOptions opt;  
+> 
+>       opt.stepsize_selector_func = OSSADirect_Stepsize;
+>       opt.single_step_func =  OSSA_SingleStep;
+>       opt.progress_interval = 100000000L;
+> 	  //opt.store_state_func =  &Exponential_StoreState;
+62,64c93
+<       opt.relative_tol = 1e-5;
+< 
+<       double TimeFinal =30.0;
+---
+>       opt.relative_tol = 1e-5;   
+65a95,96
+>       double TimeFinal = 30.0;       
+>       
+67c98,99
+<       EndPtStats endpts = CollectStats(iterations, X0, 0, TimeFinal, rxns, opt);
+---
+>       EndPtStats endpts = 
+>       CollectStats(iterations, X0, 0, TimeFinal, rxns, opt);
+69c101
+<       std::cerr << "Done.\n";
+---
+>       //std::cerr << "Endpoints written to file:  "<< outFile << "\n";
+72c104
+<    catch (const std::exception& ex) {
+---
+>    catch (const std::exception& ex){

@@ -1,0 +1,27 @@
+#VRML_SIM V5.0 utf8
+#000000
+#!mainWindow: 0.00277778 0 0.494444 0.675676
+#!sceneTreeWindow: 0.025 0.613022 0.402778 0.361179 0.253472
+#!logWindow: 0.513194 0.756757 0.467361 0.238329
+
+WorldInfo {
+  info [
+    "Created using Webots Python World Generator (WebotsPWG)"
+    "Author: Loic Matthey, loic.matthey@epfl.ch"
+    "Date: $today"
+  ]
+}
+Viewpoint {
+  orientation 0.993225 -0.0845234 -0.0797448 4.74138
+  position 0.00578928 4.31259 0.369652
+}
+Background {
+  skyColor [
+    0.4 0.7 1
+  ]
+}
+DirectionalLight {
+  direction -0.5 -1 -0.5
+  intensity 0.5
+}
+

@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbml xmlns="http://www.sbml.org/sbml/level1" level="1" version="1">
+<model name="HeatShock">
+<notes> 
+<body xmlns="http://www.w3.org/1999/xhtml">
+<h1>HeatShock</h1>
+<table border="0" cellspacing="0" cellpadding="2" >
+<thead>
+<tr>
+<th align="left" valign="middle" bgcolor="#eeeeee">Reactions&#160;&#160;&#160;&#160;&#160;&#160;&#160;</th>
+<th align="left" valign="middle" bgcolor="#eeeeee">Rate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S1+S2&#160; -->&#160;S3      </td>
+<td>C1=2.54</td>
+</tr>
+<tr>
+<td>S3&#160; -->&#160;S1+S2      </td>
+<td>C2=1</td>
+</tr>
+<tr>
+<td>S4+S1&#160; -->&#160;S5      </td>
+<td>C3=0.254</td>
+</tr>
+<tr>
+<td>S5&#160; -->&#160;S4+S1      </td>
+<td>C4=1</td>
+</tr>
+<tr>
+<td>S1+S6&#160; -->&#160;S7      </td>
+<td>C5=0.0254</td>
+</tr>
+<tr>
+<td>S7&#160; -->&#160;S1+S6      </td>
+<td>C6=10</td>
+</tr>
+<tr>
+<td>S4+S14&#160; -->&#160;S15      </td>
+<td>C7=254</td>
+</tr>
+<tr>
+<td>S15&#160; -->&#160;S4+S14      </td>
+<td>C8=10000</td>
+</tr>
+<tr>
+<td>S16+S14&#160; -->&#160;S17      </td>
+<td>C9=0.000254</td>
+</tr>
+<tr>
+<td>S17&#160; -->&#160;S16+S14      </td>
+<td>C10=0.01</td>
+</tr>
+<tr>
+<td>S3+S6&#160; -->&#160;S8      </td>
+<td>C11=0.000254</td>
+</tr>
+<tr>
+<td>S8&#160; -->&#160;S3+S6      </td>
+<td>C12=1</td>
+</tr>
+<tr>
+<td>S5+S6&#160; -->&#160;S9      </td>
+<td>C13=0.000254</td>
+</tr>
+<tr>
+<td>S9&#160; -->&#160;S5+S6      </td>
+<td>C14=1</td>
+</tr>
+<tr>
+<td>S3+S10&#160; -->&#160;S12      </td>
+<td>C15=2.54</td>
+</tr>
+<tr>
+<td>S12&#160; -->&#160;S3+S10      </td>
+<td>C16=1</td>
+</tr>
+<tr>
+<td>S5+S11&#160; -->&#160;S13      </td>
+<td>C17=2540</td>
+</tr>
+<tr>
+<td>S13&#160; -->&#160;S5+S11      </td>
+<td>C18=1000</td>
+</tr>
+<tr>
+<td>S15+S18&#160; -->&#160;S19      </td>
+<td>C19=0.0254</td>
+</tr>
+<tr>
+<td>S19&#160; -->&#160;S15+S18      </td>
+<td>C20=1</td>
+</tr>
+<tr>
+<td>S13&#160; -->&#160;S22+S13      </td>
+<td>C21=6.62</td>
+</tr>
+<tr>
+<td>S22&#160; -->&#160;      </td>
+<td>C22=0.5</td>
+</tr>
+<tr>
+<td>S22&#160; -->&#160;S14+S22      </td>
+<td>C23=20</td>
+</tr>
+<tr>
+<td>S14&#160; -->&#160;      </td>
+<td>C24=0.03</td>
+</tr>
+<tr>
+<td>S17&#160; -->&#160;S16      </td>
+<td>C25=0.03</td>
+</tr>
+<tr>
+<td>S15&#160; -->&#160;S4      </td>
+<td>C26=0.03</td>
+</tr>
+<tr>
+<td>S19&#160; -->&#160;S4+S18      </td>
+<td>C27=0.03</td>
+</tr>
+<tr>
+<td>S28&#160; -->&#160;S4+S27      </td>
+<td>C28=0.03</td>
+</tr>
+<tr>
+<td>S13&#160; -->&#160;S23+S13      </td>
+<td>C29=1.67</td>
+</tr>
+<tr>
+<td>S23&#160; -->&#160;      </td>
+<td>C30=0.5</td>
+</tr>
+<tr>
+<td>S23&#160; -->&#160;S18+S23      </td>
+<td>C31=20</td>
+</tr>
+<tr>
+<td>S18&#160; -->&#160;      </td>
+<td>C32=0.03</td>
+</tr>
+<tr>
+<td>S19&#160; -->&#160;S15      </td>
+<td>C33=0.03</td>
+</tr>
+<tr>
+<td>S12&#160; -->&#160;S25+S12      </td>
+<td>C34=0.00625</td>
+</tr>
+<tr>
+<td>S25&#160; -->&#160;      </td>
+<td>C35=0.5</td>
+</tr>
+<tr>
+<td>S25&#160; -->&#160;S4+S25      </td>
+<td>C36=7</td>
+</tr>
+<tr>
+<td>S4&#160; -->&#160;      </td>
+<td>C37=0.03</td>
+</tr>
+<tr>
+<td>S19&#160; -->&#160;S18+S14      </td>
+<td>C38=3</td>
+</tr>
+<tr>
+<td>S21&#160; -->&#160;S20      </td>
+<td>C39=0.7</td>
+</tr>
+<tr>
+<td>S28&#160; -->&#160;S14+S27      </td>
+<td>C40=0.5</td>
+</tr>
+<tr>
+<td>S13&#160; -->&#160;S24+S13      </td>
+<td>C41=1</td>
+</tr>
+<tr>
+<td>S24&#160; -->&#160;      </td>
+<td>C42=0.5</td>
+</tr>
+<tr>
+<td>S24&#160; -->&#160;S20+S24      </td>
+<td>C43=20</td>
+</tr>
+<tr>
+<td>S20&#160; -->&#160;      </td>
+<td>C44=0.03</td>
+</tr>
+<tr>
+<td>S21&#160; -->&#160;S4      </td>
+<td>C45=0.03</td>
+</tr>
+<tr>
+<td>S4+S20&#160; -->&#160;S21      </td>
+<td>C46=2.54</td>
+</tr>
+<tr>
+<td>S21&#160; -->&#160;S4+S20      </td>
+<td>C47=10000</td>
+</tr>
+<tr>
+<td>S13&#160; -->&#160;S26+S13      </td>
+<td>C48=0.43333</td>
+</tr>
+<tr>
+<td>S26&#160; -->&#160;      </td>
+<td>C49=0.5</td>
+</tr>
+<tr>
+<td>S26&#160; -->&#160;S27+S26      </td>
+<td>C50=20</td>
+</tr>
+<tr>
+<td>S27&#160; -->&#160;      </td>
+<td>C51=0.03</td>
+</tr>
+<tr>
+<td>S28&#160; -->&#160;S15      </td>
+<td>C52=0.03</td>
+</tr>
+<tr>
+<td>S15+S27&#160; -->&#160;S28      </td>
+<td>C53=2.54</td>
+</tr>
+<tr>
+<td>S28&#160; -->&#160;S15+S27      </td>
+<td>C54=10000</td>
+</tr>
+<tr>
+<td>S5&#160; -->&#160;S1      </td>
+<td>C55=0.03</td>
+</tr>
+<tr>
+<td>S13&#160; -->&#160;S1+S11      </td>
+<td>C56=0.03</td>
+</tr>
+<tr>
+<td>S9&#160; -->&#160;S7      </td>
+<td>C57=0.03</td>
+</tr>
+<tr>
+<td>S15&#160; -->&#160;S14      </td>
+<td>C58=0.03</td>
+</tr>
+<tr>
+<td>S19&#160; -->&#160;S14+S18      </td>
+<td>C59=0.03</td>
+</tr>
+<tr>
+<td>S28&#160; -->&#160;S14+S27      </td>
+<td>C60=0.03</td>
+</tr>
+<tr>
+<td>S21&#160; -->&#160;S20      </td>
+<td>C61=0.03</td>
+</tr>
+</tbody>
+</table>
+<h2>inital value </h2>
+<table border="0" cellspacing="0" cellpadding="2" >
+<thead>
+<tr>
+<th align="left" valign="middle" bgcolor="#eeeeee">Reactions&#160;&#160;&#160;&#160;&#160;&#160;&#160;</th>
+<th align="left" valign="middle" bgcolor="#eeeeee">Rate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S1  </td>
+<td>0</td>
+</tr>
+<tr>
+<td>S2  </td>
+<td>0</td>
+</tr>
+<tr>
+<td>S3  </td>
+<td>0</td>
+</tr>
+<tr>
+<td>S4  </td>
+<td>0</td>
+</tr>
+<tr>
+<td>S5  </td>
+<td>1</td>
+</tr>
+<tr>
+<td>S6  </td>
+<td>4.64567e+06</td>
+</tr>
+<tr>
+<td>S7  </td>
+<td>1324</td>
+</tr>
+<tr>
+<td>S8  </td>
+<td>80</td>
+</tr>
+<tr>
+<td>S9  </td>
+<td>16</td>
+</tr>
+<tr>
+<td>S10  </td>
+<td>3413</td>
+</tr>
+<tr>
+<td>S11  </td>
+<td>29</td>
+</tr>
+<tr>
+<td>S12  </td>
+<td>584</td>
+</tr>
+<tr>
+<td>S13  </td>
+<td>1</td>
+</tr>
+<tr>
+<td>S14  </td>
+<td>22</td>
+</tr>
+<tr>
+<td>S15  </td>
+<td>0</td>
+</tr>
+<tr>
+<td>S16  </td>
+<td>171440</td>
+</tr>
+<tr>
+<td>S17  </td>
+<td>9150</td>
+</tr>
+<tr>
+<td>S18  </td>
+<td>2280</td>
+</tr>
+<tr>
+<td>S19  </td>
+<td>6</td>
+</tr>
+<tr>
+<td>S20  </td>
+<td>596</td>
+</tr>
+<tr>
+<td>S21  </td>
+<td>0</td>
+</tr>
+<tr>
+<td>S22  </td>
+<td>13</td>
+</tr>
+<tr>
+<td>S23  </td>
+<td>3</td>
+</tr>
+<tr>
+<td>S24  </td>
+<td>3</td>
+</tr>
+<tr>
+<td>S25  </td>
+<td>7</td>
+</tr>
+<tr>
+<td>S26  </td>
+<td>0</td>
+</tr>
+<tr>
+<td>S27  </td>
+<td>260</td>
+</tr>
+<tr>
+<td>S28  </td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+</body>
+</notes>
+</model>
+</sbml>

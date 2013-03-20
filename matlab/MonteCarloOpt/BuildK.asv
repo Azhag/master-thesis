@@ -1,0 +1,29 @@
+% Generates a K matrix for a set of desired occupancies %
+
+load KvecStart  % MAKE THIS
+
+% HAS TO INCLUDE DEFINED PROBABILITIES
+K = zeros(NSites, NSites);
+
+for(iconn=1:NConnections)
+    % off-diagonal elements are just the reaction k's with inversed indices
+    K(Connections(iconn,2),Connections(iconn,1))= Kvec(iconn);
+    % diagonal elements are negative sums of all otugoing rates 
+    K(Connections(iconn,1),Connections(iconn,1)) = ...
+        K(Connections(iconn,1),Connections(iconn,1)) - Kvec(iconn);
+end;
+
+YDesExt = null(K);  % record null vector as x_desired
+XDesExt = XDesExt/sum(XDesExt);
+
+% Solve for eigenvalues and eigenvectors of K %
+[V D] = eig(K);
+Lam = diag(D);
+% the nonzero eigenvalues
+%Evs = Lam(setdiff(1:NSites, find(abs(Lam) == min(abs(Lam)))));
+Evs = Lam(setdiff(1:NSites, find(abs(real(Lam)) == min(abs(real(Lam))))));
+% their average
+Dett = abs(prod(Evs))^(1/(NSites-1));
+% smallest/largest nonzero eigval
+EvMin = min(real(Evs));
+EvMax = max(real(Evs));

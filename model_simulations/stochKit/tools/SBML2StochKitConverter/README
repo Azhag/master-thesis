@@ -1,0 +1,82 @@
+#******************************************************************************
+#*  FILE:  SBML2STOCHKIT CONVERTER README
+#*
+#*  AUTHOR: HongLi
+#*
+#*  CREATED: Mar 06, 2005
+#*
+#*  LAST MODIFIED:
+#*             BY:
+#*             TO:
+#*  SUMMARY:
+#*
+#*
+#*  NOTES:
+#*
+#*
+#*
+#*  TO DO:
+#*
+#*
+#****************************************************************************|
+#        1         2         3         4         5         6         7         8
+#//2345678901234567890123456789012345678901234567890123456789012345678901234567890
+                                                                                                                             
+
+SBML2STOCHKIT CONVERTER README
+
+0. Recommend the java version "1.4.2_01"
+
+1. How to use the parser
+          
+1)  Set the environment variable
+          
+    a)setenv CONVERTER_HOME  (The home dir for the package)
+
+      Example: 
+        setenv CONVERTER_HOME $HOME/converter
+          
+    b)setenv LD_LIBRARY_PATH (The dir for the libs)
+	  Please specify the $CONVERTER_HOME/lib to be one of them
+
+      Example:
+        setenv  LD_LIBRARY_PATH "$CONVERTER_HOME/lib: $LD_LIBRARY_PATH"
+          
+2)  Write the SBML file for your model
+
+   Our SBML2STOCHKIT CONVERTER can accept standard Version1(level 1 and 2) 
+    and Version 2 SBML files with  requests.(For details, see the following section).
+          
+3)  Run the Converter with the following command in the converter home dir
+
+      java -classpath .:./jar:./jar/parser.jar:./jar/xerces.jar Converter test.xml 100 
+
+   Note: test.xml is the file name of your SBML file 
+        and 10 is how long you want to simulate
+
+4) Get the result
+   
+   The results are in the subdirectory of $CONVERTER_HOME with the model name 
+   you specified in your SBML file.
+          
+2. Specifying Parameters for the Converter
+   
+1) After sepcifying the model, give the <listOfSpecies>,
+    including the initial value for each species
+    (This is the number of molecules of sepcies, NOT the concentration)
+          
+   Example:
+     <specie name="S1" compartment="DimerDecay" initialAmount="1000"boundaryCondition="false" />
+          
+2) In the <listOfReactions> specify the kinetic lawfor each reaction
+          
+   Example:
+     <kineticLaw formula="c1*S1">
+          
+3) In the <kineticLaw formula="c1*S1"> specify theParameter
+          
+   Example:
+    <listOfParameters>
+      <parameter name="c1" value="1"/>
+    </listOfParameters>
+          

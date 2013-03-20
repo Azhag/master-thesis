@@ -1,0 +1,51 @@
+\section{Conclusion} % (fold)
+\label{sec:conclusion}
+	Through this project, we presented a framework to perform a Top-down control over an existing system. It has been tested on a specific assembly task for robots.
+	
+	We first stated the overall framework and its components. Particularly, we defined two separate systems connected together by the Top-down control approach, the \textit{intrinsic} and the \textit{augmented} system. Our other major choice is the use of a Chemical Reaction Network mathematical model for all the framework. It allows a description of many systems while being widely accepted and used in the scientific community, especially in the life science community.
+
+	\paragraph{}	
+	We presented the test case on which we have applied our framework. This test case is a robotic assembly platform using a team of multiple robots. This has been completely developed and simulated using the 3D realistic physical simulation Webots. The platform has been created to verify a couple of properties, e.g. a well-mixed property of agents. The robotic platform allows us to assemble pieces following an arbitrary assembly plan, easily modifiable. We measured extensively the behavior of this platform under several conditions.
+	
+	\paragraph{}
+	We introduced the mathematical representation in term of a chemical reaction network of our robotic platform. All its parameters where fitted by using first an heuristic guess based on geometric probabilities, behavior of the robots and measures of our platform. The theoretical parameters were then compared and adapted to the real measured ones, in order to closely fit to the physical simulation. This chemical reaction network has be simulated in two different ways: using an ODE approximation and with an exact stochastic simulation. Both simulations successfully captured the behavior of the physical system. The ODE approximation is wrong when few number of robots and pieces are considered, as one would hypothesize. On the other hand, the stochastic simulation captured especially well the quantitative global behavior of the physical system. Some characteristics still need to be accounted for, for example the irrecoverable errors in the physical simulation, or the divergence from a well-mixed system when the robots overcrowded certain parts of the arena.
+
+	We also successfully modeled a scenario where the robotic platform can create two different final assemblies. The assembly plans used, as well as geometric constraints and pieces availability then defined the probability to generate the first or the second final assembly.
+	
+	\paragraph{}
+	We introduced our Top-down control goal as the capacity to accurately control the ratio between the two final assemblies, while converging quickly to that state.
+	
+	In order to perform this control optimization, we introduced several results for the convergence of chemical networks and their dependence upon the reactions rate constants. We developed an algorithm representing the chemical reaction network and the goal of controlling the final ratio of final assemblies as a linear program function of the rate constants.
+	
+	It allowed us to define any target ratio and to make the system converge to it only by using a specific set of reactions rate constants. Control of the ratio was achieved by modifying only a small subset of all rates, namely the one controlling the final building reactions. The obtained behavior gave insights into the flexibility shown by such chemical reaction networks. We studied extensively the evolution of the controlled system and the behavior it showed. We then presented a direct application of our findings, in the shape of a ``green manufacturing'' system, which change its target final assembly smoothly during one experiment. It showed that our robotic platform displayed a flexibility in its capacities that are harder to replicate using classical assembly lines process for example.
+	
+	We finished by studying the effect of our optimization scheme on a set of assembly plans. The goal was to study if it would directly perform a discrete optimization of the plans, outputting the assembly plans most adapted to the assemblies being built. Interestingly, such a result took place, in a continuous fashion. A close analysis of the optimized rates showed several regimes of activity, corresponding to several dynamic plans, depending on the target assemblies. This is a surprising result, and research in that direction could lead to interesting discoveries.
+	
+	\paragraph{}
+	Finally, we implemented our theoretical findings into our simulated robotic platform. This mapping was straightforward because of the strong relation built through the application of our whole framework. Stochastic simulations of the controlled system showed a behavior in accordance with the theoretical findings, even though several approximations were made to perform the optimization.
+	
+	However, the physical simulations showed a bigger discrepancy. The number of final puzzle was small and the system was crowded by initial and mid-assemblies. We think this is due to physical characteristics of our system, and because of the non-spatiality assumption made in the model. The real system does not validate this non-spatiality assumption in general, especially when disassembling a piece. This leads to a sub-optimal behavior when the number of pieces is too small.
+	
+	It showed that the last step in our framework, namely mapping back the model onto the physical system, is crucial, and very sensitive to hypotheses and real problems. It is still interesting to see that a full loop was successfully constructed, which would permit us to perform an iterative improving loop to more closely match the model to the physical system.
+
+	\paragraph{}
+	We think that our framework showed promising results, especially its model component. Chemical reaction networks are powerful explanatory tools, and they allow for a very precise yet very insightful representation of processes. While still being hard to manipulate and design because of their non linearity, we managed to propose an efficient optimization scheme, allowing a direct Top-down control scheme over the assembly process.
+	
+% section conclusion (end)
+
+\section{Outlook} % (fold)
+\label{sec:outlook}
+
+	Further work might go in several directions:
+	
+	\begin{my_enumerate}
+		\item A more precise and general way to map the mathematical model on the physical system, the Top-down mapping, should be proposed. As of now, we take advantage of the simplicity and strong links between our simulation and our model, but this might not be true for other systems. Furthermore, we saw that, even in our simple case, small problems could cause big issues.
+		\item We created different assembly platforms, namely a self-assembly and a mixed-assembly platform. They showed interesting results, but were not studied mathematically and optimized in this current work. We think they might show new dynamics which would help improving our framework.
+		\item Our optimization process should be verified and compared more thoroughly against other optimization and searches in the parameter space of possible rate constants. This is the goal of an ongoing paper on our work.
+	\end{my_enumerate}
+	
+	Finally, we would really like to apply this framework to a completely different system, like a biological system or a microscale assembly process. Such systems show complex dynamics which requires a precise and flexible framework. As we first thought our framework to be applied to such systems, it would be only fair to eventually answer our claim that it is well adapted to such inherently complex systems.
+	
+	If this comes to be true, we would be pleased to have developed with success a framework capable of handling systems so utterly different as a biological process and a team of multi robots. We think there will be a need for flexible frameworks allowing an easy transfer of knowledge and informations between scientists working on completely different fields. Scientific work done at the frontier of several fields will soon give rise to impressive new possibilities (e.g. nanoscale robots to deliver drugs directly in the body), so if a framework can help towards that goal, we hope our work will provide a step forward.
+	
+% section outlook (end)

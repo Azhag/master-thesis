@@ -1,0 +1,24 @@
+
+       StochKit version 1.0
+
+StochKit is a convenient tool for high performance stochastic simulations.
+This version includes support for stochastic simulation by 
+Gillespie's SSA method, slow scale SSA method, tau-leaping method, 
+implicit tau-leaping method, and implicit trapezoidal method, Useful 
+matlab tools are provided to analyze simulation results. An SBML 
+parser is provided using Java. An MPI framework is also provided for 
+users who would like to use parallel machine to speed up their Monte Carlo
+simulations. 
+
+For documentation see the StochKit User's Guide. 
+
+StochKit can choose to use the LAPACK (Fortran) as its linear solver. 
+By default it uses its own linear solver. 
+
+NOTE:
+1. Wherenever you use our pacakge, we recommend you build the SPRNG 
+in your own computer to avoid conflicts.
+
+2. Please report bugs to stochkit@cs.ucsb.edu. We will reply as soon
+as possible. So far we've known some bugs for the optimized direct 
+method. We will try to fix it in later release. 

@@ -1,0 +1,193 @@
+We consider the problem of designing the system described by model
+\eqref{eq:matrixODE} subject to \eqref{eq:cons} to produce desired
+quantities of parts as quickly as possible. The objective will be
+posed as the design of {\it optimal rates} $k_i^+, k_i^-$,
+$i=1,...,6$, which define an {\it optimal rate matrix}
+$\mathbf{K}^*$ according to \eqref{eq:Kdef}, that minimize the
+convergence time of the system to a vector of target part
+quantities, $\mathbf{x^d}$. Note that although only the amounts of
+the final assemblies $F1$ and $F2$ may need to be specified in
+practice, our optimization problem requires that target quantities
+of {\it all} parts be defined.
+
+We first specify $x_1^d, x_2^d, x_3^d, x_5^d, x_8^d$ and a parameter
+\begin{equation}
+\alpha \equiv x_{F1}^d/(x_{F1}^d+x_{F2}^d)~. \label{eq:alpha}
+\end{equation}
+Then we compute the dependent variables $x_4^d, x_6^d, x_7^d,$ and
+$x_{F1}^d+x_{F2}^d$ from the conservation equations \eqref{eq:cons}
+and definition \eqref{eq:alpha} and check that they are positive to
+ensure a valid $\mathbf{x^d}$. In this way, we can keep
+$x_{F1}^d+x_{F2}^d$ and the target non-final part quantities
+constant while adjusting the ratio between $x_{F1}$ and $x_{F2}$
+using $\alpha$.  Theorem \ref{thm:unique_equilibrium} shows that we
+can achieve $\mathbf{x^d}$ from any initial distribution
+$\mathbf{x^0}$ by specifying that $\mathbf{\bar{x}} = \mathbf{x^d}$
+through the following constraint on $\mathbf{K}$,
+\begin{equation}
+\mathbf{M}\mathbf{K}\mathbf{y(x^d)} = \mathbf{0}~.
+\label{eq:equilConstr}
+\end{equation}
+
+%The rates $k_i^+, k_i^-$ can be chosen so that the assembly system
+%yields a target piece distribution $\mathbf{x^d} > \mathbf{0}$
+%starting from {\it any} initial distribution of pieces.
+
+%, as will be discussed later in this section.
+
+%We can define measures of this time by reformulating the system in
+%terms of new variables.
+
+Now we consider the aspect of minimizing the convergence time to
+$\mathbf{x^d}$.  We quantify this time in terms of the system {\it
+relaxation times} $\tau_i$, $i=1,...,6$, the times in which
+different modes (dynamically independent variables) of the the
+system converge to a stable equilibrium after
+perturbation~\cite{bib:Heinrich1977,bib:Jamshidi2008}.  Various
+measures of the average relaxation time of a CRN have been defined,
+but they are applicable only under certain conditions, such as a
+linear reaction sequence \cite{bib:Heinrich1991}.  For instance, one
+such measure was minimized in the optimization of rates for the
+linear chain in \cite{Schuster:1987p11838}.
+
+To estimate the relaxation times, we first reformulate the system in
+terms of new variables.  Define $v_i$, $i=1,...,6$, as the
+difference between the forward and reverse fluxes associated with
+reaction $i$ in system \eqref{eq:reduced_macro_continuous}. For
+example, $v_1 = k_1 x_1 x_2 - k_2 x_5$.  Let $\mathbf{v(x)} =
+[v_1~...~v_{6}]^T$ and let $\mathbf{S} \in \mathbb{R}^{6 \times 10}$
+denote the stoichiometric matrix of the system, which is defined
+such that model \eqref{eq:matrixODE} can be written as
+\cite{bib:Heinrich1996}:
+\begin{equation}
+\mathbf{\dot{x}} = \mathbf{S} \mathbf{v(x)}~.
+\end{equation}
+        %The entries $s_{ij}$ of $\mathbf{S}$ for this model are $-1$, $0$,
+        %or $1$.
+
+%Our assembly system is similar to a model of a biochemical network
+%with mass action kinetics.
+
+%we take a common approach in studying the dynamical properties of a
+%CRN,
+
+The dynamical properties of a CRN are often analyzed by linearizing
+the ODE model of the system about an equilibrium and studying the
+properties of the associated Jacobian matrix $\mathbf{J} =
+\mathbf{S} \mathbf{G}$, where the entries of $\mathbf{G}$ are
+$G_{ij} = dv_i/dx_j$ \cite{bib:Jamshidi2008}.  Denoting the
+eigenvalues of $\mathbf{J}$ by $\lambda_i$, a common measure of
+relaxation time is $\tau_i = 1/|Re(\lambda_i)|$.  Since the
+$\lambda_i$ are negative at a stable equilibrium, one way to yield
+fast convergence is to choose rates
+ that minimize the largest $\lambda_i$. However,
+in our system it is very difficult to find analytical expressions
+for the $\lambda_i$.  We use an alternative estimate of relaxation
+time that is also derived by linearizing the system around its
+equilibrium $\mathbf{x^d}$ \cite{bib:Heinrich1996},
+\begin{equation}
+\tau_j = \left( \sum_{i=1}^{10} (-s_{ij}) \frac{d v_j}{d x_i}
+\right)^{-1}_{\mathbf{x} = \mathbf{x^d}} ~.\label{eq:tau}
+\end{equation}
+
+
+%we explore other ways of quantifying convergence time.
+
+%, as was done for a linear chain of enzymatic reactions
+%in~\cite{Schuster:1987p11838}
+
+%We use a general estimate of the relaxation time for each reaction
+
+
+Each reaction $j$ in system \eqref{eq:reduced_macro_continuous} is
+of the form $X_k + X_l
+~~{\mathop{\rightleftharpoons}_{k_j^-}^{k_j^+}}~~ X_m$.  Thus, $v_j
+= k_j^+ x_k x_l - k_j^- x_m$, and the entries of column $j$ in
+$\mathbf{S}$ are all $0$ except for $s_{kj} = s_{lj} = -1$ and
+$s_{mj} = 1$.  Then according to equation \eqref{eq:tau}, the
+relaxation time for each reaction is
+\begin{equation}
+\tau_j = (k_j^+(x_k^d + x_l^d) + k_j^-)^{-1}~. \label{eq:tauSys}
+\end{equation}
+
+Define $\mathbf{k} \in \mathbb{R}^{12}$ as the vector of all rates
+$k_i^+, k_i^-$. Using equation \eqref{eq:tauSys}, we define two
+possible objective functions $f:\mathbb{R}^{12} \rightarrow
+\mathbb{R}$, the average $\tau_j^{-1}$ and the minimum
+$\tau_j^{-1}$, to {\it maximize} in order to produce fast
+convergence to $\mathbf{x^d}$:
+\begin{eqnarray}
+f_{ave}(\mathbf{k}) &=& \tfrac{1}{6} \sum_{j=1}^{6} \tau_j^{-1}~, \label{eq:obj1} \\
+f_{min}(\mathbf{k}) &=& \min \{ \tau_1^{-1}, \ldots,
+\tau_{6}^{-1}\}~. \label{eq:obj2}
+\end{eqnarray}
+
+%The first is the average inverse relaxation time,
+%The second is the minimum inverse relaxation time,
+
+Finally, we write the rates $k_i^+, k_i^-$ in terms of the tunable
+probabilities $p_i^+, p_i^-$ using equation \eqref{eq:rateDef} and
+define these probabilities as the optimization variables.  Let
+$\mathbf{p} \in \mathbb{R}^{12}$ be the vector of all $p_i^+,
+p_i^-$.  Then the optimization problem can be posed as
+\textbf{Problem P} below.  It will be referred to as \textbf{Problem
+P1} when $f = f_{ave}$ and as \textbf{Problem P2} when $f =
+f_{min}$.
+
+\vspace{3mm} \noindent \textbf{[P] } \hspace{2mm} ~maximize ~~
+$f(\mathbf{k(p)})$
+
+\vspace{1mm}
+
+\hspace{7mm} subject to ~~$\mathbf{M}\mathbf{K(p)}\mathbf{y(x^d)} =
+\mathbf{0}$, ~~$\mathbf{0} \leq \mathbf{p} \leq \mathbf{1}$~.
+\vspace{2mm}
+
+Problems P1 and P2 are both linear programs, which can be solved
+efficiently.  To check that they do in fact minimize convergence
+time, we implemented a Monte Carlo method \cite{ref:Landau00}, which
+is more computationally expensive, to find the $\mathbf{k(p)}$ that
+directly minimizes this time. We measure the degree of convergence
+to $\mathbf{x^d}$ by $\Delta(\mathbf{x}) =
+||\mathbf{y(x)}-\mathbf{y(x^d)}||_2$ and say that one system
+converges faster than another if it takes less time for
+$\Delta(\mathbf{x})$ to decrease to some small fraction, here
+defined as $0.1$, of its initial value.  At each iteration,
+$\mathbf{k(p)}$ is perturbed by a random vector and projected onto
+the null space of linearly independent rows of a matrix $\mathbf{N}$
+defined such that $\mathbf{N}\mathbf{k} =
+\mathbf{M}\mathbf{K}\mathbf{y(x^d)} = \mathbf{0}$.  Once
+$\mathbf{k(p)}$ also satisfies $\mathbf{0} \leq \mathbf{p} \leq
+\mathbf{1}$, it is used to simulate the reduced macro-continuous ODE
+model to find $\Delta(\mathbf{x})$ after some time. Since the system
+is stable by Theorem \ref{thm:unique_equilibrium},
+$\Delta(\mathbf{x})$ always decreases monotonically with time, so a
+Newton scheme can be used to compute the exact time $t_{0.1}$ when
+$\Delta(\mathbf{x}) = 0.1\Delta(\mathbf{x^0})$.
+
+%, its $k_i^+$ entries are scaled by $p_i^e p_i^a$,
+
+%adjustable parameters of the physical assembly system.   Each
+%forward rate $k_j^+$ is defined by the product in equation
+%\eqref{eq:reaction_assembly_rate} multiplied by a probability of
+%starting the assembly, $p_j^+ \in \{0, 1\}$.
+
+%Since this problem can be formulated as the
+%minimization of a linear combination of the entries of $\mathbf{p}$
+%subject to a set of linear equality and inequality constraints on
+%$\mathbf{p}$, it is a linear program, which can be solved
+%efficiently.
+
+        % subsubsection convex_program_definition (end)
+
+    % subsection design_of_optimal_rates (end)
+
+ %   \subsection{Optimization implementation} % (fold)
+  %  \label{sub:optimization_implementation}
+ %       In order to optimize the convex programs P1 and P2, we use a framework for Matlab, YALMIP\cite{Lofberg:2004p11461}. It allows us to define our optimization variables, objective function and constraints and to apply a semidefinite programming solving algorithm, running in polynomial time \cite{Lofberg:2004p11461}.
+    % subsection optimization_implementation (end)
+% section methodology (end)
+
+%$p_j^e$ is the encountering probability defined by \eqref{eq:encountering_probability},
+%dependent on some parameters and $p_j^a$ is the assembly success rate,
+%which we measure as explained in Section~\ref{ssub:stochastic_constant_rates_values}.

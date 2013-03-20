@@ -1,0 +1,118 @@
+#VRML_SIM V5.0 utf8
+#000000
+#!mainWindow: 0.00277778 0 0.494444 0.675676
+#!sceneTreeWindow: 0.0423611 0.556511 0.402778 0.361179 0.253472
+#!textEditorWindow: 0.50625 0 0.486111 0.898034 0.347222
+#!logWindow: 0.513194 0.756757 0.467361 0.238329
+#!robotWindow: "" 0.536111 0.0933661 0.277778 0.737101 0
+
+WorldInfo {
+  info [
+    "Created using Webots Python World Generator (WebotsPWG)"
+    "Author: Loic Matthey, loic.matthey@epfl.ch"
+    "Date: 2008-05-30"
+  ]
+}
+Viewpoint {
+  orientation 0.999923 -0.0119124 0.00336321 6.23544
+  position -0.257163 0.759584 8.50424
+}
+Background {
+  skyColor [
+    0.4 0.7 1
+  ]
+}
+DirectionalLight {
+  direction -0.5 -1 -0.5
+  intensity 0.5
+}
+PointLight {
+  ambientIntensity 0.5
+  attenuation 1 1 1
+  intensity 0.5
+  location 0 0.5 0
+  radius 5
+}
+SimpleChair {
+  translation -0.0170169 1.57461 0.000256538
+}
+PointLight {
+  ambientIntensity 0.5
+  attenuation 1 1 1
+  intensity 0.5
+  location 2.25 0.5 2.25
+  radius 5
+}
+PointLight {
+  ambientIntensity 0.5
+  attenuation 1 1 1
+  intensity 0.5
+  location -2.25 0.5 -2.25
+  radius 5
+}
+PointLight {
+  ambientIntensity 0.5
+  attenuation 1 1 1
+  intensity 0.5
+  location 2.25 0.5 -2.25
+  radius 5
+}
+PointLight {
+  ambientIntensity 0.5
+  attenuation 1 1 1
+  intensity 0.5
+  location -2.25 0.5 2.25
+  radius 5
+}
+DEF GROUND Solid {
+  translation 0 -0.3 0
+  children [
+    DEF ground_shape Shape {
+      geometry Box {
+        size 10 0.1 10
+      }
+    }
+  ]
+  boundingObject USE ground_shape
+}
+DEF PLATFORM CustomRobot {
+  translation 0 0.05 0
+  children [
+    DEF platform_foot Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.333333 0.258824 0.8
+        }
+      }
+      geometry Box {
+        size 4 0.5 4
+      }
+    }
+    Servo {
+      translation 0 0.4 0
+      rotation 1 0 0 1.57
+      children [
+        Transform {
+          children [
+            DEF platform_movable Shape {
+              geometry Box {
+                size 3 3 0.1
+              }
+            }
+          ]
+        }
+      ]
+      name "platform_servo"
+      boundingObject USE platform_movable
+      type "linear"
+    }
+  ]
+  boundingObject USE platform_foot
+  physics Physics {
+    density -1
+    mass 100
+    bounce 0
+    coulombFriction 1000
+  }
+  controller "platform"
+}

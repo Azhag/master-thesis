@@ -1,0 +1,1 @@
+java -classpath .:./jar:./jar/parser.jar:./jar/xerces.jar Converter $1 $2

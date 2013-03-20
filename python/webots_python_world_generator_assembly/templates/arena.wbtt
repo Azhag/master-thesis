@@ -1,0 +1,118 @@
+
+DEF GROUND Solid {
+  children [
+    Transform {
+      translation -$size 0 -$size
+      children [
+        Shape {
+          geometry ElevationGrid {
+            color Color {
+              color [
+                0.345098 0.345098 0.345098
+              ]
+            }
+            colorPerVertex FALSE
+            xDimension $groundSize
+            xSpacing $groundSpacing
+            zDimension $groundSize
+            zSpacing $groundSpacing
+          }
+        }
+      ]
+    }
+  ]
+  boundingObject Shape {
+    geometry IndexedFaceSet {
+      coord Coordinate {
+        point [
+          $size 0 $size
+          -$size 0 $size
+          -$size 0 -$size
+          $size 0 -$size
+        ]
+      }
+      coordIndex [
+        0, 1, 2, 3, -1
+      ]
+    }
+  }
+}
+
+DEF WALL Solid {
+  children [
+    Transform {
+      scale 1 1 1
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              ambientIntensity 0.5
+              diffuseColor 0.662745 0.439216 0.219608
+              shininess 0.5
+              specularColor 0.764706 0.505882 0.25098
+            }
+          }
+          geometry Extrusion {
+            convex FALSE
+            crossSection [
+              $size $size
+              $size -$size
+              -$size -$size
+              -$size $size
+              -$size_with_wall $size
+              -$size_with_wall -$size_with_wall
+              $size_with_wall -$size_with_wall
+              $size_with_wall $size_with_wall
+              -$size_with_wall $size_with_wall
+              -$size_with_wall $size
+              $size $size
+            ]
+            spine [
+              0 0 0
+              0 0.1 0
+            ]
+          }
+        }
+      ]
+    }
+  ]
+  boundingObject Group {
+    children [
+      Transform {
+        translation 0 0.05 -$wall_translation
+        children [
+          Box {
+            size $size_doubled 0.1 $wall_size
+          }
+        ]
+      }
+      Transform {
+        translation $wall_translation 0.05 0
+        rotation 0 1 0 1.57
+        children [
+          Box {
+            size $size_doubled 0.1 $wall_size
+          }
+        ]
+      }
+      Transform {
+        translation 0 0.05 $wall_translation
+        children [
+          Box {
+            size $size_doubled 0.1 $wall_size
+          }
+        ]
+      }
+      Transform {
+        translation -$wall_translation 0.05 0
+        rotation 0 1 0 1.57
+        children [
+          Box {
+            size $size_doubled 0.1 $wall_size
+          }
+        ]
+      }
+    ]
+  }
+}
+

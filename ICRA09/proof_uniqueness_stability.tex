@@ -1,0 +1,46 @@
+\begin{theorem}\label{thm:unique_equilibrium}
+System \eqref{eq:matrixODE} subject to \eqref{eq:cons} has a unique,
+stable equilibrium $\mathbf{\bar{x}} > \mathbf{0}$.
+\end{theorem}
+\begin{proof}  Each equilibrium of the system, $\{\mathbf{\bar{x}}
+~|~\mathbf{M}\mathbf{K}\mathbf{y(\bar{x})} = \mathbf{0}\}$, can be
+classified as either a {\it positive} equilibrium $\mathbf{\bar{x}}
+> \mathbf{0}$ or a {\it boundary} equilibrium in which $\bar{x}_i
+= 0$ for some $i$, which can be found by solving
+$\mathbf{y(\mathbf{\bar{x}})} =
+\mathbf{0}$~\cite{Chaves:2004p11839}.  From definition
+\eqref{eq:ydef1} of $\mathbf{y(x)}$, it can be concluded that in
+each boundary equilibrium, all $x_i = 0$ except for one of the four
+combinations of variables $(x_1,x_3), (x_1,x_4), (x_2,x_3),
+(x_2,x_4)$.  Since we only consider systems that can produce
+$x_{F1}$ and $x_{F2}$, it is not possible for the system to reach
+any of these equilibria; each one lacks two part types needed for
+the final assemblies.
+
+%whose rows are each obtained by subtracting a column of $\mathbf{M}$
+%associated with a reactant in a particular reaction from a column
+%associated with a product
+
+The {\it deficiency} $\delta$ of a reaction network is the number of
+complexes minus the number of linkage classes, each of which is a
+set of complexes connected by reactions, minus the network rank,
+which is the rank of the matrix with rows $\mathbf{m}_i -
+\mathbf{m}_j$, $(i,j) \in \cal{E}$ \cite{Feinberg:1995p9419}.
+ Network \eqref{eq:reduced_macro_continuous} has $12$ complexes, $6$
+linkage classes, and rank $6$; hence, $\delta = 0$.  Also, the
+network is {\it weakly reversible} because whenever there is a
+directed arrow pathway from complex $i$ to complex $j$, there is one
+from $j$ to $i$.  Because the network has deficiency $0$, is weakly
+reversible, and does not admit any boundary equilibria, it has a
+unique, globally asymptotically stable positive equilibrium
+according to Theorem 4.1 of \cite{Siegel:2000}.
+\end{proof}
+
+%These properties, along with the fact that the system kinetics are
+%mass-action, satisfy the criteria for applying the Deficiency Zero
+%Theorem \cite{Feinberg:1995p9419}, which gives the result that the
+%system has exactly one positive steady state, which is
+%asymptotically stable.  In fact, by Theorem 4.1 of
+%\cite{Siegel:2000}
+
+%\cite{Feinberg:1987p9428}

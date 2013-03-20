@@ -1,0 +1,256 @@
+\documentclass[letter,11pt,oneside]{report}
+\usepackage[english]{swis_report_template}
+
+%\usepackage{geometry} % Déinir les marges
+\usepackage{latexsym,amsfonts,amssymb, amsmath, amsthm}
+
+\usepackage{subfigure} % Plusieurs figures sur la même ligne.
+%\usepackage{here} %positionnement H.
+\usepackage{aeguill}  % sans ça, fontes bitmap affreuses Ruffin
+
+\usepackage{fancyhdr} %Headers ++
+
+\usepackage{ulem} % double soulignement
+
+\usepackage{url} % Gestion des urls
+
+\usepackage{pdfpages}
+
+\usepackage[pdftex]{hyperref}
+\hypersetup{
+    bookmarks=true,         % show bookmarks bar?
+    unicode=true,          % non-Latin characters in Acrobat’s bookmarks
+    pdftoolbar=true,        % show Acrobat’s toolbar?
+    pdfmenubar=true,        % show Acrobat’s menu?
+    pdffitwindow=true,      % page fit to window when opened
+    colorlinks=false,       % false: boxed links; true: colored links
+    linkcolor=red,          % color of internal links
+    citecolor=green,        % color of links to bibliography
+    filecolor=magenta,      % color of file links
+    urlcolor=cyan,          % color of external links
+	pdfstartview = FitH, 	% La page prend toute la largeur
+	pdfpagelayout = SinglePage, % Vue par page
+	pdfpagemode = None, 	% Signets/vignettes fermé à l'ouverture
+	bookmarksnumbered = true % Signets numérotés
+}
+
+%   
+% bookmarks = true, 	% Signets
+% bookmarksnumbered = true, 	% Signets numérotés
+% pdfpagemode = None, 	
+% %pdfstartview = FitH, 	% La page prend toute la largeur
+% %pdfpagelayout = SinglePage, 	% Vue par page
+% %colorlinks = false, 	% Liens en couleur
+% %urlcolor = red, 	% Couleur des liens externes
+% %pdfborder = {1 1 1} 	% Style de bordure : ici, pas de bordure
+% ]{hyperref} 	% Utilisation de HyperTeX
+
+%\addtolength{\textwidth}{0.7cm} %1.5
+\addtolength{\textwidth}{2.8cm} %1.5
+%\addtolength{\oddsidemargin}{-0.5cm}
+\addtolength{\oddsidemargin}{-40pt} %-19
+%\addtolength{\evensidemargin}{-19pt}
+\addtolength{\marginparwidth}{15pt} % 11
+\addtolength{\textheight}{60pt}
+%\addtolength{\hoffset}{-1.5cm}  
+\addtolength{\voffset}{-20pt}
+%\setlength{\footskip}{0cm}
+
+\newenvironment{my_itemize}{
+\begin{itemize}
+  \setlength{\itemsep}{4pt}
+  \setlength{\topsep}{0pt}
+  \setlength{\partopsep}{0pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+}{\end{itemize}
+}
+
+\newenvironment{my_enumerate}{
+\begin{enumerate}
+  \setlength{\itemsep}{4pt}
+  \setlength{\topsep}{0pt}
+  \setlength{\partopsep}{0pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+}{\end{enumerate}
+}
+
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+
+%%
+%%  Project details (please verify carefully with your project supervisor)
+%%
+
+\title{Hybrid Reactions Modeling for Top-down Design Framework}
+\shorttitle{HyRToD Master project}
+\author{Lo\"ic Matthey}
+\semester{SS}
+\year{2008}
+\epflsection{IC-SIN}
+\reportnumber{KUMAR-SWIS-MP12}
+\startdate{19.02.2008}
+\enddate{15.08.2008}
+\professor{Alcherio Martinoli, Vijay Kumar}
+\advisor{Gregory Mermoud, Spring Berman}
+\coverimage{img/title.pdf}
+
+% hauts de page
+\pagestyle{headings} 
+\markright{Lo\"ic Matthey }
+
+%% 
+%%  Title page, Table of contents, and running headers/footers are all 
+%%  generated automatically (according to the information provided above, 
+%%  and the structure of the document)
+%% 
+
+\begin{document}
+\maketitle
+\clearpage
+
+% empty page
+\pagebreak
+\thispagestyle{empty}
+\begin{center}\tiny \sc This page intentionally left blank.\end{center}
+
+%% Project proposal
+\includepdf[pages=1-2]{KUMAR-SWIS-MP12_proposal.pdf}
+
+%%% Abstract %%%%
+\begin{abstract}
+	This report presents the work accomplished by Lo\"ic Matthey during his Master project from Ecole Polytechnique Federale de Lausanne (EPFL). This project was a joint work between the Distributed Intelligent System and Algorithms (DISAL) Laboratory at EPFL, Switzerland and the General Robotics, Automation, Sensing and Perception (GRASP) Laboratory at University of Pennsylvania, United States of America. It took place in the Master spring-summer semester 2008.
+
+	We present a theoretical framework to design Top-down control scheme for arbitrary systems. Being able to control a complex system using high-level instructions only is a promising and attractive paradigm. Our approach is based on the use of a Chemical Reaction Network model, used as a proxy to derive the control schemes. To test the application of our method, we consider the Top-down control of a realistic multi-robots assembly platform, simulated using a 3D physics simulator, Webots.
+	
+	First we present the modeling of the robotic platform using a Chemical Reaction Network. The free parameters are precisely fitted. We simulate the system using an ODE approximation and an exact stochastic simulation. We find that the model can be made to fit quantitatively to the experimental data, especially when using a stochastic simulation approach.
+	
+	Second we define an optimization and control scheme for a class of Chemical Reaction Networks. We prove convergence results and write the optimization problem as a linear program of the time of convergence of the system under constraints on the equilibrium value. It allows us to design sets of reaction rates producing a specified converged behavior, in polynomial time. This optimization provides precise controls of the system using only high-level goals.
+	
+	Finally, we map the optimized model down onto the realistic physical assembly platform. We find that the system can be controlled using the optimized parameters of the model level, but that small discrepancies can have disruptive effects.
+
+\end{abstract}
+
+% empty page
+\pagebreak
+\thispagestyle{empty}
+\begin{center}\tiny \sc This page intentionally left blank.\end{center}
+\pagebreak
+
+% List of figures
+\setcounter{page}{1}
+\setcounter{lofdepth}{2}
+\listoffigures
+% List of tables
+\listoftables
+
+
+\cleardoublepage
+%%% Table of Contents %%%
+\tableofcontents   % table des matières
+
+% % empty page
+% \pagebreak
+% \thispagestyle{empty}
+% \begin{center}\tiny \sc This page intentionally left blank.\end{center}
+% \pagebreak
+
+%%%%%%%%%%%%% Text %%%
+%%
+%%  Your report chapters begin here
+%%
+
+
+\chapter{Introduction} % (fold)
+\label{cha:introduction}
+	\input{introduction.tex}
+% chapter introduction (end)
+
+% % empty page
+\pagebreak
+\thispagestyle{empty}
+\begin{center}\tiny \sc This page intentionally left blank.\end{center}
+\pagebreak
+
+
+\chapter{Project description} % (fold)
+\label{cha:project_description}
+	\input{project_description.tex}
+% chapter project_description (end)
+
+
+\chapter{Field overview} % (fold)
+\label{cha:field_overview}
+	\input{field_overview.tex}
+% chapter field_overview (end)
+
+\chapter{Puzzle test-case implementation} % (fold)
+\label{cha:puzzle_test_case_implementation}
+	\input{puzzle_implementation.tex}
+% chapter puzzle_test_case_implementation (end)
+
+\chapter{Mathematical model of the puzzle test-case} % (fold)
+\label{cha:mathematical_model_of_the_puzzle_test_case}
+	\input{mathematical_model.tex}
+% chapter mathematical_model_of_the_puzzle_test_case (end)
+
+% % empty page
+\pagebreak
+\thispagestyle{empty}
+\begin{center}\tiny \sc This page intentionally left blank.\end{center}
+\pagebreak
+
+
+\chapter{Chemical reaction networks control and design} % (fold)
+\label{cha:chemical_reaction_networks_control_and_design}
+	\input{chemical_network_control.tex}
+% chapter chemical_reaction_networks_control_and_design (end)
+
+% % empty page
+\pagebreak
+\thispagestyle{empty}
+\begin{center}\tiny \sc This page intentionally left blank.\end{center}
+\pagebreak
+
+\chapter{Augmented assembly implementation} % (fold)
+\label{cha:augmented_assembly_implementation}
+	\input{augmented_assembly_implementation.tex}
+% chapter augmented_assembly_implementation (end)Î
+
+% % empty page
+\pagebreak
+\thispagestyle{empty}
+\begin{center}\tiny \sc This page intentionally left blank.\end{center}
+\pagebreak
+
+
+\chapter{Conclusion and outlook} % (fold)
+\label{cha:conclusion_and_outlook}
+	\input{conclusion.tex}
+% chapter conclusion_and_outlook (end)
+
+\chapter{Additional Material} % (fold)
+\label{cha:additional_material}
+	\input{additional_material.tex}
+% chapter additional_material_and_bibliography (end)
+
+
+%%
+%%  Bibliography
+%%
+\cleardoublepage
+\addcontentsline{toc}{chapter}{{Bibliography}}
+
+% Prints all the non-cited references
+\nocite{*}
+
+% Use style 'alphakey' or 'alpha' for the draft, and then switch
+% to 'unsrt' or 'plain' or 'ieeetr' styles for the final version,
+% since they are the IEEE preferred ones.
+\bibliographystyle{ieeetr}
+\bibliography{master_bib}
+
+
+\end{document}

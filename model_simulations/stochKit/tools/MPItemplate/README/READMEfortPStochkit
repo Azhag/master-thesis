@@ -1,0 +1,165 @@
+//******************************************************************************
+//*  FILE:  READMEfortPStochkit
+//*
+//*  AUTHOR: HongLi
+//*
+//*  CREATED: Mar 06, 2005
+//*
+//*  LAST MODIFIED:
+//*             BY:
+//*             TO:
+//*  SUMMARY:
+//*
+//*
+//*  NOTES:
+//*
+//*
+//*
+//*  TO DO:
+//*
+//*
+//****************************************************************************|
+//        1         2         3         4         5         6         7         8
+//2345678901234567890123456789012345678901234567890123456789012345678901234567890
+
+README for the PStochkit
+  
+1. Write the parallel code for your application using this template. 
+  You need modify this template for your specific application.
+
+   (We will use the dimering decay model as the example to explain 
+   this step. There are two other examples: the heatshock and Schlogl 
+   models under the directory "test".)
+   
+  Note: In the directory "test" which includes all the examples, 
+        the directories with the "p" as the first character are 
+	directories for parallel, otherwise, they are for the 
+	single processor systems. 
+	For example, the code under dir "dimmer" is for the 
+	singlep rocessor systems the code under dir "pdimer" 
+	is for parallel.
+   Suppose you have written your code for a single processor system. 
+   Copy the files for the single processor system to a new directory.
+   Example:  DimerDecay
+           copy all the files from "dimer" to the "pdimer"
+   
+   Make the following change:
+
+1> Change your main function to a normal function call
+
+   Note: put the output file name and iterations as 
+         the parameters instead of reading from the commnad line
+   
+   Example: (DimerDecay) 
+           Open DimerStats.cpp
+           Use the "int DimerStats(int iterations, char* outFile)"
+           to replace the "main" fucntion line
+           and remove those lines concened with the arguments 
+		   and output file, which are the following codes:
+            /* 
+             //parse arguments
+             int iterations;
+             const char* outFile;
+                                                                                 
+             if (argc != 3) {
+                std::cerr << "Usage:  dimerstats <# runs>"
+                                   <<"<output file>";
+                exit(EXIT_FAILURE);
+             }
+             else {
+                iterations = atoi(argv[1]);
+                outFile = argv[2];
+             }
+           */
+
+2> Update the include files to reflect the above changes
+  
+   Example:
+    Put int "DimerStats(int iterations, char* outFile);" 
+	into the DimerStats.h and include DimerStats.h in
+	DimerStats.cpp.
+
+3> Copy the Template parallel.cpp to the new directory
+   and edit as follows:
+
+   a) Add the include file "Random.h" and 
+      the incldue file for the new problem:
+   
+       Example:
+         #include "Random.h"
+         #include "DimerStats.h"
+
+   b) set the parameters
+ 
+        TotalIte :   How many samples you need to simulate
+        NodeIte:     How many samples each node will simulate
+	             at one assigment. This parameter should be
+		     chosen not too small, otherwise the 
+		     message passing overhead will be larger. Nor 
+		     should it be too large, otherwise it may take 
+		     too long for a slow node.
+        ModelName:   The directory name for the result
+ 
+        Example:
+          int TotalIte=10000; // We need an ensemble of 10000 samples
+          int NodeIte=500;  //Each time, a node will simulate 500 samples
+          char ModelName[50] = "DM"; // The name of the model
+
+   c) Set the function call. 
+      In the fucntion "static unit_result_t do_work(unit_of_work_t work)",
+      add your fucntion call with work and workdir as parameters after 
+	  the line:
+          sprintf(workdir, "./result/%d%s/%d.txt", 
+               myrank, ModelName, CalledTimes);
+          
+         Example: 
+              DimerStats(work, workdir);
+
+4> Copy our Makefile to your new directory and edit as follows:
+
+      a) set the EXE to the name you prefer for your code
+
+         Example(Dimdedecay):
+           EXE     = p_dimer
+
+      b) chane the parameters in the OBJS to the files name you use
+
+         Example(DImerDecay):
+         OBJS = parallel.o DimerStats.o ProblemDefinition.o
+
+      c) Change another name according to what you did in "4> a)"
+ 
+         Example: (Dimerdecay)
+           change the p_dimer to the same name as 
+           what you have set for the EXE as following:
+                p_dimer: $(OBJS)
+                 $(MPICC) -o $@ $^ ${LINK_OPTIONS}
+
+5> Compile the parallel code.
+   Type 
+       a) make clean
+	   then
+       b) make
+   Now you are ready to run parallel code.
+
+2. Instruction to run
+
+   1> To run the parallel code, use the command:
+      
+	  mpirun -np <number of total nodes> p_dimer (change it for your won model)
+	  
+      This means we want to use 8 nodes to run the job. One will 
+      be the master node, and seven slave node will do the simualtions.
+      (This number must be larger than 1) 
+
+   2> After finished, you can find all the results in the directory
+      "result".
+	  
+   3> You can go to the subdirectory to collect all the data. 
+      Just type
+         cat */* >result.txt
+      Then all the results will be saved in the result.txt
+
+WRNING:
+Before and after your simulation,make sure that you have and empty directory
+"result". This help to avoid mixing your simulation results.

@@ -1,0 +1,38 @@
+We developed and presented a method to systematically derive
+decentralized control policies for a swarm of robots performing
+assembly tasks to manufacture different products in response to
+varying demand. We represent the system using a multi-level modeling
+methodology. The micro-continuous model is derived from the dynamics
+of the robots and the assembly task and is implemented on a
+physics-based simulator.  The collective behavior of the system,
+including the physical interactions between robots, is abstracted to
+a macro-continuous ODE model. The model incorporates parameters that
+govern the stochastic control policies running on individual robots
+for performing the assembly task. By tuning the parameters of the
+ODE, we can also tune the performance of the assembly system. This
+optimization relies on global stability properties of a specific
+class of chemical reaction networks that are modeled by the
+macro-continuous model. We implement the optimization as a linear
+program with constraints on target amounts of parts at equilibrium,
+using two possible objective functions that are based on an estimate
+of the system convergence time.  We simulate the macro-continuous
+model and observe that it achieves the target final product amounts
+faster with optimized rates than with non-optimal rates, and that it
+can quickly respond to changes in the target equilibrium.  Finally,
+we map the rates onto probabilities of assembly and disassembly in
+the micro-continuous model.  We find that the resulting system can
+produce the target product amounts, although discrepancies arise due
+to violation of the well-mixed property, low part numbers, and
+failure to capture certain physical effects in the macro-continuous
+model.
+
+Our future work will focus on tuning the macro-continuous model to
+match the physical system more closely, addressing in particular the
+lack of spatial homogeneity due to a small number of robots and
+parts. In addition, we also want to investigate the synthesis of the
+discrete assembly plans and incorporate feedback into the process.
+This direction draws inspiration from bio-molecular pathways in
+which intermediate subassemblies or molecules can promote or inhibit
+chemical reactions. We would like to be able to optimize the
+discrete assembly plan by constructing feedback loops to improve the
+yield rate.

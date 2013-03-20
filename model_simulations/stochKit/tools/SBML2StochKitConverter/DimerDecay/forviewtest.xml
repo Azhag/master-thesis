@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbml xmlns="http://www.sbml.org/sbml/level1" level="1" version="1">
+<model name="DimerDecay">
+<notes> 
+<body xmlns="http://www.w3.org/1999/xhtml">
+<h1>DimerDecay</h1>
+<table border="0" cellspacing="0" cellpadding="2" >
+<thead>
+<tr>
+<th align="left" valign="middle" bgcolor="#eeeeee">Reactions&#160;&#160;&#160;&#160;&#160;&#160;&#160;</th>
+<th align="left" valign="middle" bgcolor="#eeeeee">Rate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S1&#160; -->&#160;      </td>
+<td>c1=1</td>
+</tr>
+<tr>
+<td>S1+S1&#160; -->&#160;S2      </td>
+<td>c2=0.002</td>
+</tr>
+<tr>
+<td>S2&#160; -->&#160;S1+S1      </td>
+<td>c3=0.5</td>
+</tr>
+<tr>
+<td>S2&#160; -->&#160;S3      </td>
+<td>c4=0.04</td>
+</tr>
+</tbody>
+</table>
+<h2>inital value </h2>
+<table border="0" cellspacing="0" cellpadding="2" >
+<thead>
+<tr>
+<th align="left" valign="middle" bgcolor="#eeeeee">Reactions&#160;&#160;&#160;&#160;&#160;&#160;&#160;</th>
+<th align="left" valign="middle" bgcolor="#eeeeee">Rate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S1  </td>
+<td>1000</td>
+</tr>
+<tr>
+<td>S2  </td>
+<td>0</td>
+</tr>
+<tr>
+<td>S3  </td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+</body>
+</notes>
+</model>
+</sbml>

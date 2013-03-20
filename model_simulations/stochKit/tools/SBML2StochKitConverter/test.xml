@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbml xmlns="http://www.sbml.org/sbml/level1" level="1" version="1">
+<model name="DimerDecay">
+
+	<listOfSpecies>
+	 <specie name="S1" compartment="DimerDecay" initialAmount="1000" boundaryCondition="false" />
+	 <specie name="S2" compartment="DimerDecay" initialAmount="0" boundaryCondition="false" />
+	 <specie name="S3" compartment="DimerDecay" initialAmount="0" boundaryCondition="false" />
+	</listOfSpecies>
+	
+	<listOfReactions>
+	 <reaction name="Reaction1" reversible="false">
+	   <listOfReactants>
+	     <specieReference specie="S1" />			
+	   </listOfReactants>
+	   
+	   <listOfProducts>	
+	   </listOfProducts>
+	   
+	   <kineticLaw formula="c1*S1">	
+	     <listOfParameters>
+	       <parameter name="c1" value="1"/>
+	     </listOfParameters>		
+	   </kineticLaw>
+	 </reaction>
+	
+	 <reaction name="Reaction2" reversible="false">
+	   <listOfReactants>
+	     <specieReference specie="S1" stoichiometry="2"/>			
+	   </listOfReactants>
+	   
+	   <listOfProducts>	
+	     <specieReference specie="S2" stoichiometry="1"/>			
+	   </listOfProducts>
+	   
+	   <kineticLaw formula="(c2/2.0)*S1*(S1-1)">	
+	     <listOfParameters>
+	       <parameter name="c2" value="0.002"/>
+	     </listOfParameters>		
+	   </kineticLaw>
+	 </reaction>
+	
+	 <reaction name="Reaction3" reversible="false">
+	   <listOfReactants>
+	     <specieReference specie="S2" stoichiometry="1"/>			
+	   </listOfReactants>
+	   
+	   <listOfProducts>	
+	     <specieReference specie="S1" stoichiometry="2"/>			
+	   </listOfProducts>
+	   
+	   <kineticLaw formula="c3*S2">	
+	     <listOfParameters>
+	       <parameter name="c3" value="0.5"/>
+	     </listOfParameters>		
+	   </kineticLaw>
+	 </reaction>
+
+	 <reaction name="Reaction4" reversible="false">
+	   <listOfReactants>
+	     <specieReference specie="S2" stoichiometry="1"/>			
+	   </listOfReactants>
+	   
+	   <listOfProducts>	
+	     <specieReference specie="S3" stoichiometry="1"/>			
+	   </listOfProducts>
+	   
+	   <kineticLaw formula="c4*S2">	
+	     <listOfParameters>
+	       <parameter name="c4" value="0.04"/>
+	     </listOfParameters>		
+	   </kineticLaw>
+	 </reaction>
+	</listOfReactions>
+</model>
+</sbml>
